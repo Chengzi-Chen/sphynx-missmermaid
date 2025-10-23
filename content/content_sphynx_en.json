@@ -1,0 +1,89 @@
+{
+  "pages": {
+    "home": {
+      "title": "Home",
+      "excerpt": "World-champion Sphynx cats and kittens from the Miss Mermaid family.",
+      "content": "<!-- wp:heading {\"textAlign\":\"center\"} -->\n<h2 class=\"wp-block-heading has-text-align-center\">World-Champion Sphynx Cattery</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph {\"align\":\"center\"} -->\n<p class=\"has-text-align-center\">Different is Beautiful. We raise confident, affectionate Sphynx companions with unmatched pedigree and care.</p>\n<!-- /wp:paragraph -->\n<!-- wp:buttons {\"layout\":{\"type\":\"flex\",\"justifyContent\":\"center\"}} -->\n<div class=\"wp-block-buttons\"><div class=\"wp-block-button\"><a class=\"wp-block-button__link\" href=\"/adoption/\">Start Adoption Journey</a></div></div>\n<!-- /wp:buttons -->\n<!-- wp:columns -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">Champion Lines</h3>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p>Carefully paired queens and studs with international titles and genetic screening.</p>\n<!-- /wp:paragraph --></div>\n<!-- /wp:column --><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">Holistic Care</h3>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p>Warm habitats, custom nutrition, and daily enrichment for thriving personalities.</p>\n<!-- /wp:paragraph --></div>\n<!-- /wp:column --><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">Lifetime Support</h3>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p>Dedicated guardianship guidance, wellness checklists, and alumni community.</p>\n<!-- /wp:paragraph --></div>\n<!-- /wp:column --></div>\n<!-- /wp:columns -->"
+    },
+    "about": {
+      "title": "About",
+      "excerpt": "Meet the Miss Mermaid · Sphynx cattery team and story.",
+      "content": "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Our Miss Mermaid Promise</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p>Decades of feline expertise, wellness partnerships, and show-ring achievements define the Miss Mermaid ethos. Every cat is nurtured as family before joining yours.</p>\n<!-- /wp:paragraph -->\n<!-- wp:list -->\n<ul><li>International Cat Association award recipients</li><li>Certified veterinary technician on-site</li><li>Ethical breeding standards with transparency</li></ul>\n<!-- /wp:list -->"
+    },
+    "sphynx": {
+      "title": "Sphynx",
+      "excerpt": "Discover the unique traits and care of Sphynx cats.",
+      "content": "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Why Sphynx Cats Steal Hearts</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p>Graceful, inquisitive, and delightfully social, Sphynx cats thrive on companionship. Their hairless coats reveal every expression and demand elevated care.</p>\n<!-- /wp:paragraph -->\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><p>\"Our Sphynx are sculpted by love and science.\"</p><cite>Lead Breeder • Miss Mermaid</cite></blockquote>\n<!-- /wp:quote -->"
+    },
+    "kittens": {
+      "title": "Kittens",
+      "excerpt": "Upcoming litters, reservations, and health assurances.",
+      "content": "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Future Litters &amp; Nursery Updates</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p>Reserve early to join our curated waitlist. Each kitten completes social milestones, wellness exams, and temperament testing before homecoming.</p>\n<!-- /wp:paragraph -->\n<!-- wp:list -->\n<ul><li>Reservation fee applied to adoption</li><li>Weekly photo updates</li><li>Comprehensive health dossier</li></ul>\n<!-- /wp:list -->"
+    },
+    "adoption": {
+      "title": "Adoption",
+      "excerpt": "Step-by-step Miss Mermaid adoption experience.",
+      "content": "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Adoption in Five Careful Steps</h2>\n<!-- /wp:heading -->\n<!-- wp:ol -->\n<ol><li>Apply with lifestyle and habitat details.</li><li>Meet our guardianship coordinator for alignment.</li><li>Secure your match with reservation confirmation.</li><li>Prepare home with tailored care blueprint.</li><li>Celebrate homecoming with follow-up wellness calls.</li></ol>\n<!-- /wp:ol -->\n<!-- wp:paragraph -->\n<p>We stay beside you from inquiry through every milestone.</p>\n<!-- /wp:paragraph -->"
+    },
+    "achievements": {
+      "title": "Achievements",
+      "excerpt": "Timeline of Miss Mermaid · Sphynx accolades.",
+      "content": "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Milestones on the World Stage</h2>\n<!-- /wp:heading -->\n<!-- wp:list -->\n<ul><li><strong>2018</strong> — First international Best in Show title.</li><li><strong>2020</strong> — Genetic health excellence certification.</li><li><strong>2022</strong> — Champion queens ranked top three globally.</li><li><strong>2024</strong> — Launch of Miss Mermaid wellness retreat.</li></ul>\n<!-- /wp:list -->"
+    },
+    "gallery": {
+      "title": "Gallery",
+      "excerpt": "Sphynx portraits, nursery peeks, and alumni moments.",
+      "content": "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">A Glimpse Into Our World</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p>Use the gallery plugin to unveil lightbox stories of playful personalities, velvet cuddles, and championship rings.</p>\n<!-- /wp:paragraph -->"
+    },
+    "blog": {
+      "title": "Blog",
+      "excerpt": "Latest care tips, show news, and lifestyle features.",
+      "content": "<!-- wp:paragraph -->\n<p>Stay tuned for grooming routines, seasonal care checklists, and heartfelt alumni diaries.</p>\n<!-- /wp:paragraph -->"
+    },
+    "contact": {
+      "title": "Contact",
+      "excerpt": "Reach the Miss Mermaid guardianship team.",
+      "content": "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">We Would Love to Hear From You</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p>Email our team at <a href=\"mailto:hello@sphynx.local.mermaid\">hello@sphynx.local.mermaid</a> or book a virtual nursery tour.</p>\n<!-- /wp:paragraph -->\n<!-- wp:paragraph -->\n<p>Fluent Forms powers our detailed enquiry process for tailored matches.</p>\n<!-- /wp:paragraph -->"
+    },
+    "faq": {
+      "title": "FAQ",
+      "excerpt": "Answering common Sphynx care questions.",
+      "content": "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Frequently Asked Questions</h2>\n<!-- /wp:heading -->\n<!-- wp:details -->\n<details class=\"wp-block-details\"><summary>How do I care for their skin?</summary><p>Weekly spa rituals, hypoallergenic wipes, and moisturising balms keep Sphynx skin radiant.</p></details>\n<!-- /wp:details -->\n<!-- wp:details -->\n<details class=\"wp-block-details\"><summary>What diets do you recommend?</summary><p>High-protein, taurine-rich meals with hydration boosters, tailored per kitten.</p></details>\n<!-- /wp:details -->\n<!-- wp:details -->\n<details class=\"wp-block-details\"><summary>Do they feel cold?</summary><p>Yes, they love warm laps, knitwear, and climate-controlled snuggle zones.</p></details>\n<!-- /wp:details -->"
+    }
+  },
+  "menus": {
+    "primary": [
+      "home",
+      "about",
+      "sphynx",
+      "kittens",
+      "adoption",
+      "achievements",
+      "gallery",
+      "blog",
+      "contact",
+      "faq"
+    ],
+    "footer": [
+      "about",
+      "adoption",
+      "contact",
+      "faq",
+      "blog"
+    ]
+  },
+  "rank_math_meta": {
+    "home": {
+      "_rank_math_title": "Miss Mermaid · Sphynx — World-Champion Cattery",
+      "_rank_math_description": "Discover ethically raised, world-celebrated Sphynx cats and kittens from the Miss Mermaid collective."
+    },
+    "adoption": {
+      "_rank_math_title": "Adopt a Miss Mermaid Sphynx Kitten",
+      "_rank_math_description": "Follow our five-step guardianship pathway for confident Sphynx adoption."
+    },
+    "gallery": {
+      "_rank_math_title": "Sphynx Gallery — Miss Mermaid Highlights",
+      "_rank_math_description": "Peek into nursery life, show victories, and alumni families in our Sphynx gallery."
+    }
+  }
+}
