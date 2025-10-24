@@ -36,20 +36,36 @@ function mm_sphynx_enqueue_assets(): void {
         null
     );
 
+    $style_file    = get_stylesheet_directory() . '/style.css';
+    $style_version = MM_SPHYNX_VERSION . '-' . ( file_exists( $style_file ) ? filemtime( $style_file ) : time() );
+
     wp_enqueue_style(
         'mm-sphynx-style',
         get_stylesheet_uri(),
         [],
-        MM_SPHYNX_VERSION
+        $style_version
     );
 
     $custom_css = '
-        .wp-block-button__link:not(.has-background) {
-            background-color: #0B0B0B;
-            color: #D7B870;
+        .wp-block-button__link:not(.has-background),
+        .wp-element-button:not(.has-background) {
+            background-color: var(--mm-color-gold, #C6A15B);
+            color: var(--mm-color-black, #0B0B0F);
+            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .wp-block-button__link:hover {
-            box-shadow: 0 0 18px rgba(215, 184, 112, 0.45);
+        .wp-block-button__link:not(.has-background):hover,
+        .wp-element-button:not(.has-background):hover {
+            background-color: var(--mm-color-gold-strong, #B08C4F);
+            color: var(--mm-color-black, #0B0B0F);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+            transform: translateY(-1px);
+        }
+        a:focus-visible,
+        .wp-block-button__link:focus-visible,
+        .wp-element-button:focus-visible {
+            outline: 2px solid var(--mm-color-gold, #C6A15B);
+            outline-offset: 3px;
+            box-shadow: 0 0 0 3px rgba(11, 11, 15, 0.65);
         }
     ';
 

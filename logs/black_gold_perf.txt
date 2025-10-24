@@ -1,0 +1,6 @@
+dark-cold	/	namelookup=0.0017s	connect=0.0019s	ttfb=0.0165s	total=0.0166s	cache_runs=MISS,HIT,HIT
+dark-cold	/adoption	namelookup=0.0014s	connect=0.0016s	ttfb=0.0088s	total=0.0089s	cache_runs=MISS,HIT,HIT
+dark-cold	/sphynx	namelookup=0.0013s	connect=0.0015s	ttfb=0.0079s	total=0.0079s	cache_runs=MISS,HIT,HIT
+dark-warm	/	namelookup=0.0018s	connect=0.0020s	ttfb=0.0034s	total=0.0035s	cache_runs=HIT,HIT,HIT
+dark-warm	/adoption	namelookup=0.0014s	connect=0.0016s	ttfb=0.0028s	total=0.0029s	cache_runs=HIT,HIT,HIT
+dark-warm	/sphynx	namelookup=0.0012s	connect=0.0013s	ttfb=0.0023s	total=0.0023s	cache_runs=HIT,HIT,HIT

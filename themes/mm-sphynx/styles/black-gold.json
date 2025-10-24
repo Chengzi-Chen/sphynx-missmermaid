@@ -1,0 +1,15 @@
+{
+  "title": "Dark — Black & Gold",
+  "slug": "black-gold",
+  "description": "Primary brand palette featuring obsidian surfaces with auric accents.",
+  "styles": {
+    "color": {
+      "background": "#0B0B0F",
+      "text": "#EAEAEA",
+      "link": "#C6A15B"
+    },
+    "typography": {
+      "lineHeight": "1.65"
+    }
+  }
+}
