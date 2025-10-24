@@ -1,0 +1,3 @@
+rescue_now	/	namelookup=0.0019s	connect=0.0021s	ttfb=0.0203s	total=0.0215s	cache_runs=MISS,HIT,HIT
+rescue_now	/adoption	namelookup=0.0014s	connect=0.0016s	ttfb=0.0091s	total=0.0091s	cache_runs=MISS,HIT,HIT
+rescue_now	/sphynx	namelookup=0.0014s	connect=0.0016s	ttfb=0.0082s	total=0.0082s	cache_runs=MISS,HIT,HIT

@@ -1,6 +1,6 @@
 COMPOSE = docker compose
 
-.PHONY: up down logs db\:dump fix-install init-sphynx seed-sphynx
+.PHONY: up down logs db\:dump fix-install init-sphynx seed-sphynx sync-theme
 
 up:
 	$(COMPOSE) up -d --build
@@ -24,3 +24,6 @@ init-sphynx:
 
 seed-sphynx:
 	$(COMPOSE) exec wordpress-sphynx bash /opt/sphynx-scripts/seed_sphynx.sh
+
+sync-theme:
+	./scripts/rsync_theme.sh

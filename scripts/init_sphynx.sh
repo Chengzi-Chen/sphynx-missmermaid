@@ -110,14 +110,14 @@ assign_menu_items() {
   local menu_name="$1"
   shift
   local slugs=("$@")
-  local menu_id=$($WP menu list --fields=term_id,name --format=csv | awk -F',' -v name="$menu_name" 'NR>1 && $2==name {print $1}')
+  local menu_id=$($WP menu list --fields=term_id,name --format=csv | awk -F',' -v name="$menu_name" 'NR>1 {gsub(/"/, "", $2); if ($2==name) print $1}')
   if [ -z "$menu_id" ]; then
     menu_id=$($WP menu create "$menu_name" --porcelain)
   fi
   local items=$($WP menu item list "$menu_name" --fields=ID --format=ids || true)
   if [ -n "$items" ]; then
     for item in $items; do
-      $WP menu item delete "$menu_name" "$item" >/dev/null
+      $WP menu item delete "$menu_name" "$item" >/dev/null 2>&1 || true
     done
   fi
   for slug in "${slugs[@]}"; do

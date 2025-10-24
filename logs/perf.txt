@@ -1,0 +1,12 @@
+2025-10-24T01:14:43-07:00	/	namelookup=0.0021s	connect=0.0024s	ttfb=16.0907s	total=16.0934s	X-Cache=EXPIRED
+2025-10-24T01:14:43-07:00	/adoption	namelookup=0.0019s	connect=0.0021s	ttfb=16.0662s	total=16.0671s	X-Cache=MISS
+2025-10-24T01:14:43-07:00	/sphynx	namelookup=0.0018s	connect=0.0020s	ttfb=16.0705s	total=16.0706s	X-Cache=MISS
+2025-10-24T01:16:24-07:00	/	namelookup=0.0016s	connect=0.0017s	ttfb=0.0033s	total=0.0045s	X-Cache=HIT
+2025-10-24T01:16:24-07:00	/adoption	namelookup=0.0014s	connect=0.0016s	ttfb=16.0584s	total=16.0586s	X-Cache=MISS
+2025-10-24T01:16:24-07:00	/sphynx	namelookup=0.0017s	connect=0.0018s	ttfb=16.0406s	total=16.0409s	X-Cache=MISS
+2025-10-24T01:17:14-07:00	/	namelookup=0.0018s	connect=0.0020s	ttfb=16.0855s	total=16.0881s	X-Cache=EXPIRED
+2025-10-24T01:17:14-07:00	/adoption	namelookup=0.0020s	connect=0.0022s	ttfb=16.0470s	total=16.0473s	X-Cache=EXPIRED
+2025-10-24T01:17:14-07:00	/sphynx	namelookup=0.0015s	connect=0.0017s	ttfb=16.0619s	total=16.0623s	X-Cache=EXPIRED
+final	/	namelookup=0.0017s	connect=0.0019s	ttfb=0.0030s	total=0.0037s	cache_runs=HIT,HIT,HIT
+final	/adoption	namelookup=0.0014s	connect=0.0015s	ttfb=0.0028s	total=0.0029s	cache_runs=HIT,HIT,HIT
+final	/sphynx	namelookup=0.0012s	connect=0.0013s	ttfb=0.0023s	total=0.0024s	cache_runs=HIT,HIT,HIT

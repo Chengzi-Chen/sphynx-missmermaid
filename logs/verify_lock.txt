@@ -1,0 +1,55 @@
+[2025-10-24T02:38:20-07:00] Cleared Nginx FastCGI cache (rm -rf /var/cache/nginx/fastcgi/*)
+[2025-10-24T02:38:20-07:00] Flushed WP cache via wp cache flush
+cold	/	namelookup=0.0016s	connect=0.0017s	ttfb=0.0383s	total=0.0402s	cache_runs=MISS,MISS,MISS
+cold	/adoption	namelookup=0.0015s	connect=0.0017s	ttfb=0.0267s	total=0.0268s	cache_runs=MISS,MISS,MISS
+cold	/sphynx	namelookup=0.0021s	connect=0.0023s	ttfb=0.0278s	total=0.0279s	cache_runs=MISS,MISS,MISS
+warm	/	namelookup=0.0020s	connect=0.0023s	ttfb=0.0191s	total=0.0203s	cache_runs=EXPIRED,HIT,HIT
+warm	/adoption	namelookup=0.0022s	connect=0.0024s	ttfb=0.0121s	total=0.0122s	cache_runs=EXPIRED,HIT,HIT
+warm	/sphynx	namelookup=0.0013s	connect=0.0015s	ttfb=0.0087s	total=0.0088s	cache_runs=EXPIRED,HIT,HIT
+--- Redis Status ---
+Status: Connected
+Client: Predis (v2.4.0)
+Drop-in: Valid
+Disabled: No
+Ping: PONG
+Errors: []
+PhpRedis: Not loaded
+Relay: Not loaded
+Predis: 2.4.0
+Credis: Not loaded
+PHP Version: 8.2.29
+Plugin Version: 2.7.0
+Redis Version: 7.4.6
+Multisite: No
+Metrics: Enabled
+Metrics recorded: 12
+Filesystem: Writable
+Global Prefix: "wp_"
+Blog Prefix: "wp_"
+Timeout: 0.5
+--- PHP OPcache ---
+opcache.enable => On => On
+opcache.interned_strings_buffer => 16 => 16
+opcache.max_accelerated_files => 20000 => 20000
+opcache.memory_consumption => 256 => 256
+--- Nginx FastCGI cache config ---
+1:fastcgi_cache_path /var/cache/nginx/fastcgi levels=1:2 keys_zone=sphynx_cache:10m inactive=60s max_size=256m use_temp_path=off;
+48:        fastcgi_cache sphynx_cache;
+49:        fastcgi_cache_key "$scheme$request_method$host$request_uri";
+50:        fastcgi_cache_bypass $sphynx_skip_cache;
+52:        fastcgi_cache_valid 200 301 302 30s;
+53:        fastcgi_cache_valid any 10s;
+54:        fastcgi_cache_lock on;
+55:        fastcgi_cache_lock_timeout 5s;
+56:        fastcgi_cache_use_stale updating error timeout invalid_header http_500 http_503;
+57:        add_header X-Cache-Status $upstream_cache_status always;
+--- wp-config debug flags ---
+78:define( 'WP_DEBUG', false );
+79:define( 'WP_DEBUG_LOG', false );
+80:define( 'WP_DEBUG_DISPLAY', false );
+81:define( 'SAVEQUERIES', false );
+--- Theme mount strategy ---
+9:      - ./themes/mm-sphynx:/var/www/html/wp-content/themes/mm-sphynx:delegated
+21:      - ./themes/mm-sphynx:/var/www/html/wp-content/themes/mm-sphynx:delegated
+34:      - ./themes/mm-sphynx:/var/www/html/wp-content/themes/mm-sphynx:delegated
+rsync helper: make sync-theme (scripts/rsync_theme.sh)

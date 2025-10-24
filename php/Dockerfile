@@ -14,7 +14,9 @@ RUN set -ex \
         imagemagick \
         libmagickwand-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
-    && docker-php-ext-install -j"$(nproc)" gd intl zip \
+    && docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
+    && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
+    && docker-php-ext-install -j"$(nproc)" gd intl zip mysqli pdo_mysql \
     && pecl install imagick redis \
     && docker-php-ext-enable imagick redis \
     && rm -rf /var/lib/apt/lists/*

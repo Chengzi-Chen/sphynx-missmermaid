@@ -6,7 +6,8 @@ services:
     volumes:
       - ./nginx/sphynx.conf:/etc/nginx/conf.d/default.conf:ro
       - wordpress-data:/var/www/html
-      - ./themes/mm-sphynx:/var/www/html/wp-content/themes/mm-sphynx:ro
+      - ./themes/mm-sphynx:/var/www/html/wp-content/themes/mm-sphynx:delegated
+      - nginx-cache:/var/cache/nginx/fastcgi
     depends_on:
       - php-sphynx
     networks:
@@ -17,7 +18,7 @@ services:
       context: ./php
     volumes:
       - wordpress-data:/var/www/html
-      - ./themes/mm-sphynx:/var/www/html/wp-content/themes/mm-sphynx:ro
+      - ./themes/mm-sphynx:/var/www/html/wp-content/themes/mm-sphynx:delegated
     environment:
       - PHP_MEMORY_LIMIT=256M
     networks:
@@ -30,7 +31,7 @@ services:
       - wordpress-data:/var/www/html
       - ./scripts:/opt/sphynx-scripts:ro
       - ./content:/opt/sphynx-content:ro
-      - ./themes/mm-sphynx:/var/www/html/wp-content/themes/mm-sphynx:ro
+      - ./themes/mm-sphynx:/var/www/html/wp-content/themes/mm-sphynx:delegated
     working_dir: /var/www/html
     entrypoint: ["tail", "-f", "/dev/null"]
     environment:
@@ -65,6 +66,7 @@ services:
 volumes:
   wordpress-data:
   db-data:
+  nginx-cache:
 
 networks:
   sphynx-net:

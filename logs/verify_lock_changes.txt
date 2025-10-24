@@ -1,0 +1,18 @@
+Miss Mermaid · Sphynx performance lock verification (2025-10-24)
+
+Key configuration files updated:
+- docker-compose.yml: mount theme volume as :delegated and add nginx cache volume.
+- nginx/sphynx.conf: enable FastCGI cache, add cache-bypass maps, expose X-Cache-Status.
+- php/php.ini: enable and tune OPcache (memory 256M, 20k files, 16M interned strings).
+- php/Dockerfile: compile mysqli/pdo_mysql with mysqlnd and PECL extensions.
+- scripts/fix_wp_install.sh: harden WP constants (debug off, Redis timeouts 0.5s, cron disabled).
+- scripts/init_sphynx.sh: menu id parsing fixes and resilient deletions.
+- scripts/probe.sh & perf_test.sh: automated curl benchmarking with cache status logging.
+- scripts/rsync_theme.sh: rsync helper for volume workflow.
+- Makefile: add sync-theme target.
+
+Verification artefacts:
+- logs/verify_lock.txt: cold vs warm curl averages + component snapshots.
+- logs/nginx_tail.txt & logs/phpfpm_tail.txt: latest 200 lines for nginx/php-fpm.
+
+All changes committed under "perf: lock verified config".

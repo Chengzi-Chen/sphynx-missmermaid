@@ -30,18 +30,33 @@ if [ ! -f wp-config.php ]; then
     --extra-php <<'PHP'
 define( 'WP_HOME', 'http://sphynx.local.mermaid:8081' );
 define( 'WP_SITEURL', 'http://sphynx.local.mermaid:8081' );
-define( 'WP_DEBUG', true );
+define( 'WP_DEBUG', false );
+define( 'WP_DEBUG_LOG', false );
+define( 'WP_DEBUG_DISPLAY', false );
+define( 'SAVEQUERIES', false );
 define( 'WP_REDIS_HOST', 'redis-sphynx' );
 define( 'WP_REDIS_PORT', 6379 );
+define( 'WP_REDIS_TIMEOUT', 0.5 );
+define( 'WP_REDIS_READ_TIMEOUT', 0.5 );
+define( 'WP_REDIS_DATABASE', 0 );
 define( 'WP_CACHE', true );
 define( 'DISALLOW_FILE_EDIT', true );
+define( 'DISABLE_WP_CRON', true );
 PHP
 fi
 
 $WP config set DISALLOW_FILE_EDIT true --type=constant --raw --quiet
 $WP config set WP_CACHE true --type=constant --raw --quiet
+$WP config set WP_DEBUG false --type=constant --raw --quiet
+$WP config set WP_DEBUG_LOG false --type=constant --raw --quiet
+$WP config set WP_DEBUG_DISPLAY false --type=constant --raw --quiet
+$WP config set SAVEQUERIES false --type=constant --raw --quiet
+$WP config set DISABLE_WP_CRON true --type=constant --raw --quiet
 $WP config set WP_REDIS_HOST "redis-sphynx" --type=constant --quiet
 $WP config set WP_REDIS_PORT 6379 --type=constant --raw --quiet
+$WP config set WP_REDIS_TIMEOUT 0.5 --type=constant --raw --quiet
+$WP config set WP_REDIS_READ_TIMEOUT 0.5 --type=constant --raw --quiet
+$WP config set WP_REDIS_DATABASE 0 --type=constant --raw --quiet
 $WP config set WP_HOME "$SITE_URL" --type=constant --quiet
 $WP config set WP_SITEURL "$SITE_URL" --type=constant --quiet
 
