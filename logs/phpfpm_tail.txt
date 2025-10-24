@@ -39,3 +39,19 @@ php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:39:36 +0000 "GET /index.php" 301
 php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:40:15 +0000 "GET /index.php" 200
 php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:40:15 +0000 "GET /index.php" 301
 php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:40:15 +0000 "GET /index.php" 301
+php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:43:49 +0000 "GET /index.php" 200
+php-sphynx-1  | [24-Oct-2025 09:51:31] NOTICE: Finishing ...
+php-sphynx-1  | [24-Oct-2025 09:51:31] NOTICE: exiting, bye-bye!
+php-sphynx-1  | [24-Oct-2025 09:51:32] NOTICE: fpm is running, pid 1
+php-sphynx-1  | [24-Oct-2025 09:51:32] NOTICE: ready to handle connections
+php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:52:10 +0000 "GET /index.php" 200
+php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:52:10 +0000 "GET /index.php" 200
+php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:52:11 +0000 "GET /index.php" 200
+php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:52:12 +0000 "GET /index.php" 301
+php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:52:12 +0000 "GET /index.php" 301
+php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:52:13 +0000 "GET /index.php" 301
+php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:52:13 +0000 "GET /index.php" 301
+php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:52:14 +0000 "GET /index.php" 301
+php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:52:14 +0000 "GET /index.php" 301
+php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:52:33 +0000 "GET /index.php" 200
+php-sphynx-1  | 172.19.0.6 -  24/Oct/2025:09:52:33 +0000 "GET /index.php" 301
