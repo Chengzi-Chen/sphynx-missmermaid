@@ -1,0 +1,29 @@
+2025-10-26 菜单域名自适应修复摘要
+1. 代码变更
+   - themes/mm-sphynx/functions.php：新增 mm_sphynx_is_https_request() / mm_sphynx_adjust_host_url() 辅助函数，扩展 wp_nav_menu_objects 与 render_block 过滤器，使菜单与导航区块在运行期将旧本地域名替换为当前 Host + 协议。
+2. 缓存刷新
+   - wp cache flush
+   - wp redis flush（命令不存在，保留记录）
+   - wp rewrite flush --hard
+3. 菜单 URL 对比
+   - 数据库存储（Main Navigation）示例：
+     • http://sphynx.localtest.me:8081/
+     • http://sphynx.localtest.me:8081/about/
+     • http://sphynx.localtest.me:8081/kittens/
+   - 反代访问（Host=demo.trycloudflare.com, X-Forwarded-Proto=https）前 10 个站内链接：
+     • https://demo.trycloudflare.com/feed/
+     • https://demo.trycloudflare.com/comments/feed/
+     • https://demo.trycloudflare.com/xmlrpc.php?rsd
+     • https://demo.trycloudflare.com/
+     • https://demo.trycloudflare.com
+     • https://demo.trycloudflare.com/
+     • https://demo.trycloudflare.com/about/
+     • https://demo.trycloudflare.com/kittens/
+     • https://demo.trycloudflare.com/achievements/
+     • https://demo.trycloudflare.com/gallery/
+4. curl 检测（Host=demo.trycloudflare.com）
+   run=1  ttfb=0.041662s  total=0.043911s
+   run=2  ttfb=0.001427s  total=0.002306s
+   run=3  ttfb=0.001554s  total=0.002383s
+
+请在 trycloudflare / 其他反代域名下刷新 Header / Footer，确认链接均指向当前 Host。
