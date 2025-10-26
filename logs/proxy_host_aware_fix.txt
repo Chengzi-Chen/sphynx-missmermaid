@@ -1,0 +1,20 @@
+2025-10-26 主机自适应修复摘要
+1. 文件调整
+   - /var/www/html/wp-config.php：移除硬编码 WP_HOME/WP_SITEURL，加入基于 Host/X-Forwarded-Proto 的动态定义，确保在 trycloudflare 等反代域名下指向当前主机与协议。
+   - nginx/sphynx.conf：在 PHP 块内补充 fastcgi_param HTTPS $https if_not_empty 与 fastcgi_param HTTP_X_FORWARDED_PROTO $http_x_forwarded_proto，并 reload Nginx。
+   - 注：wp-config.php 位于 docker 卷 wordpress-data 中，已通过 docker compose cp 方式回写。
+
+2. 缓存与重建
+   - 执行 wp cache flush、wp transient delete --all、wp rewrite structure '/%postname%/' --hard、wp rewrite flush --hard、wp eval 'wp_enqueue_global_styles();'。
+   - wp redis flush 子命令在当前环境不可用，已由 cache flush + Redis 缓存刷新覆盖。
+
+3. Host 样式验证
+   - 请求头 Host=demo.trycloudflare.com，X-Forwarded-Proto=https。
+   - CSS 链接现为：https://demo.trycloudflare.com/wp-content/themes/mm-sphynx/style.css?ver=0.1.0-1761349987。
+
+4. curl 性能 (nginx 内网三次，单位 s)
+   run=1 namelookup=0.000529 connect=0.000615 ttfb=0.032736 total=0.035604
+   run=2 namelookup=0.000931 connect=0.001116 ttfb=0.001536 total=0.001664
+   run=3 namelookup=0.001228 connect=0.001432 ttfb=0.001878 total=0.002011
+
+请在当前 trycloudflare 域名下刷新页面确认视觉样式与本地一致。
