@@ -1,0 +1,96 @@
+{
+  "kittens": [
+    {
+      "kitten_id": "MM001",
+      "status": "available",
+      "price": 4800.0,
+      "sex": "female",
+      "color": "White",
+      "birthday": "",
+      "age_hint": "4 months",
+      "temperament_tags": "Calm; affectionate",
+      "cover_image": "media/kittens/aurora.jpg",
+      "gallery": [
+        "media/kittens/aurora.jpg"
+      ],
+      "short_desc": "A gentle, affectionate kitten with radiant skin and soft wrinkles.",
+      "detail": {
+        "sire": "",
+        "dam": "",
+        "health_notes": "",
+        "value_points": "",
+        "care_profile": "",
+        "videos": [],
+        "apply_text": "Apply for this kitten",
+        "apply_url": "/apply?kitten=MM001"
+      }
+    },
+    {
+      "kitten_id": "MM002",
+      "status": "reserved",
+      "price": 4500.0,
+      "sex": "male",
+      "color": "Blue bicolor",
+      "birthday": "",
+      "age_hint": "5 months",
+      "temperament_tags": "Playful; curious",
+      "cover_image": "media/kittens/loki.jpg",
+      "gallery": [
+        "media/kittens/loki.jpg"
+      ],
+      "short_desc": "Playful boy with confident personality, great with families.",
+      "detail": {
+        "sire": "",
+        "dam": "",
+        "health_notes": "",
+        "value_points": "",
+        "care_profile": "",
+        "videos": [],
+        "apply_text": "Apply for this kitten",
+        "apply_url": "/apply?kitten=MM002"
+      }
+    }
+  ],
+  "adoption_flow": [
+    {
+      "key": "apply",
+      "order": 1,
+      "title": "Submit Application",
+      "copy": "Tell us about yourself and your home to ensure a good match.",
+      "cta_text": "Apply Now",
+      "cta_target": "/apply"
+    },
+    {
+      "key": "review",
+      "order": 2,
+      "title": "Breeder Review",
+      "copy": "We review every application carefully to protect our kittens' welfare.",
+      "cta_text": "",
+      "cta_target": ""
+    },
+    {
+      "key": "payment",
+      "order": 3,
+      "title": "Secure with Deposit",
+      "copy": "Once approved, send $1000 deposit via Zelle or PayPal F&F.",
+      "cta_text": "",
+      "cta_target": ""
+    },
+    {
+      "key": "contract",
+      "order": 4,
+      "title": "Sign Agreement",
+      "copy": "Sign your adoption contract and receive digital documents.",
+      "cta_text": "",
+      "cta_target": ""
+    },
+    {
+      "key": "pickup",
+      "order": 5,
+      "title": "Pick Up or Delivery",
+      "copy": "Schedule your pickup or hand-delivery in LA area. No cargo shipping for Sphynx.",
+      "cta_text": "",
+      "cta_target": ""
+    }
+  ]
+}

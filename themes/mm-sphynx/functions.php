@@ -33,6 +33,25 @@ function mm_sphynx_register_hooks(): void {
     add_action( 'admin_notices', 'mm_sphynx_admin_notices' );
     add_shortcode( 'mm_magic_login', 'mm_sphynx_magic_login_shortcode' );
     add_shortcode( 'mm_application_portal', 'mm_sphynx_application_portal_shortcode' );
+    add_shortcode( 'mm_form', 'mm_sphynx_form_shortcode' );
+}
+
+function mm_arr_get( $array, $key, $default = '' ) {
+    if ( is_array( $array ) && array_key_exists( $key, $array ) ) {
+        return $array[ $key ];
+    }
+
+    return $default;
+}
+
+function mm_bool( $value ): bool {
+    $filtered = filter_var( $value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+
+    return null === $filtered ? (bool) $value : $filtered;
+}
+
+function mm_sphynx_placeholder_image(): string {
+    return trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/placeholder.svg';
 }
 
 function mm_sphynx_setup(): void {
@@ -40,6 +59,8 @@ function mm_sphynx_setup(): void {
     add_theme_support( 'editor-styles' );
     add_theme_support( 'responsive-embeds' );
     add_theme_support( 'html5', [ 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ] );
+    add_theme_support( 'post-thumbnails' );
+    add_image_size( 'mm-card', 640, 480, true );
 
     register_nav_menus(
         [
@@ -50,13 +71,6 @@ function mm_sphynx_setup(): void {
 }
 
 function mm_sphynx_enqueue_assets(): void {
-    wp_enqueue_style(
-        'mm-sphynx-fonts',
-        'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap',
-        [],
-        null
-    );
-
     $style_file    = get_stylesheet_directory() . '/style.css';
     $style_version = MM_SPHYNX_VERSION . '-' . ( file_exists( $style_file ) ? filemtime( $style_file ) : time() );
 
@@ -208,134 +222,124 @@ function mm_sphynx_register_acf_groups(): void {
             'title'                 => __( 'Kitten Details', 'mm-sphynx' ),
             'fields'                => [
                 [
-                    'key'               => 'field_mm_kitten_id',
-                    'label'             => __( 'Kitten ID', 'mm-sphynx' ),
-                    'name'              => 'kitten_id',
-                    'type'              => 'text',
-                    'required'          => 1,
-                    'instructions'      => __( 'Unique identifier used internally and on adoption dossiers.', 'mm-sphynx' ),
-                    'wrapper'           => [ 'width' => '25' ],
-                ],
-                [
-                    'key'          => 'field_mm_birthdate',
-                    'label'        => __( 'Birthdate', 'mm-sphynx' ),
-                    'name'         => 'birthdate',
-                    'type'         => 'date_picker',
-                    'display_format' => 'Y-m-d',
-                    'return_format'  => 'Y-m-d',
-                    'first_day'      => 1,
-                    'wrapper'        => [ 'width' => '25' ],
-                ],
-                [
-                    'key'          => 'field_mm_age_auto',
-                    'label'        => __( 'Age (auto)', 'mm-sphynx' ),
-                    'name'         => 'age_auto',
+                    'key'          => 'field_mm_kitten_id',
+                    'label'        => __( 'Kitten ID', 'mm-sphynx' ),
+                    'name'         => 'kitten_id',
                     'type'         => 'text',
-                    'instructions' => __( 'Calculated from birthdate for display. Refresh editor to update.', 'mm-sphynx' ),
-                    'wrapper'      => [ 'width' => '25' ],
-                    'readonly'     => 1,
-                    'disabled'     => 1,
+                    'required'     => 1,
+                    'instructions' => __( 'Unique identifier used internally and across all collateral.', 'mm-sphynx' ),
+                    'wrapper'      => [ 'width' => '20' ],
                 ],
                 [
-                    'key'      => 'field_mm_sex',
-                    'label'    => __( 'Sex', 'mm-sphynx' ),
-                    'name'     => 'sex',
-                    'type'     => 'select',
-                    'choices'  => [
-                        'male'   => __( 'Male', 'mm-sphynx' ),
-                        'female' => __( 'Female', 'mm-sphynx' ),
-                    ],
-                    'wrapper'  => [ 'width' => '25' ],
-                    'return_format' => 'value',
-                ],
-                [
-                    'key'      => 'field_mm_color',
-                    'label'    => __( 'Color', 'mm-sphynx' ),
-                    'name'     => 'color',
-                    'type'     => 'select',
-                    'choices'  => [
-                        'blue'        => __( 'Blue', 'mm-sphynx' ),
-                        'seal'        => __( 'Seal', 'mm-sphynx' ),
-                        'cream'       => __( 'Cream', 'mm-sphynx' ),
-                        'red'         => __( 'Red', 'mm-sphynx' ),
-                        'white'       => __( 'White', 'mm-sphynx' ),
-                        'black'       => __( 'Black', 'mm-sphynx' ),
-                        'tabby'       => __( 'Tabby', 'mm-sphynx' ),
-                        'bicolor'     => __( 'Bi-color', 'mm-sphynx' ),
-                        'other'       => __( 'Other', 'mm-sphynx' ),
-                    ],
-                    'multiple' => 1,
-                    'ui'       => 1,
-                    'return_format' => 'value',
-                ],
-                [
-                    'key'      => 'field_mm_personality',
-                    'label'    => __( 'Personality Tags', 'mm-sphynx' ),
-                    'name'     => 'personality_tags',
-                    'type'     => 'checkbox',
-                    'choices'  => [
-                        'gentle'       => __( 'Gentle', 'mm-sphynx' ),
-                        'active'       => __( 'Active', 'mm-sphynx' ),
-                        'social'       => __( 'Social', 'mm-sphynx' ),
-                        'affectionate' => __( 'Affectionate', 'mm-sphynx' ),
-                        'curious'      => __( 'Curious', 'mm-sphynx' ),
-                        'playful'      => __( 'Playful', 'mm-sphynx' ),
-                        'confident'    => __( 'Confident', 'mm-sphynx' ),
-                        'lap-lover'    => __( 'Lap Lover', 'mm-sphynx' ),
-                    ],
-                    'layout'   => 'horizontal',
-                    'ui'       => 0,
-                ],
-                [
-                    'key'          => 'field_mm_price',
-                    'label'        => __( 'Price (USD)', 'mm-sphynx' ),
-                    'name'         => 'price',
-                    'type'         => 'number',
-                    'wrapper'      => [ 'width' => '25' ],
-                    'prepend'      => '$',
-                    'min'          => 0,
-                    'step'         => 1,
-                ],
-                [
-                    'key'      => 'field_mm_status',
-                    'label'    => __( 'Status', 'mm-sphynx' ),
-                    'name'     => 'status',
-                    'type'     => 'select',
-                    'choices'  => [
+                    'key'          => 'field_mm_status',
+                    'label'        => __( 'Status', 'mm-sphynx' ),
+                    'name'         => 'status',
+                    'type'         => 'select',
+                    'choices'      => [
                         'available' => __( 'Available', 'mm-sphynx' ),
                         'upcoming'  => __( 'Upcoming', 'mm-sphynx' ),
                         'reserved'  => __( 'Reserved', 'mm-sphynx' ),
                         'adopted'   => __( 'Adopted', 'mm-sphynx' ),
                     ],
                     'default_value' => 'available',
-                    'return_format' => 'value',
+                    'wrapper'       => [ 'width' => '20' ],
                 ],
                 [
-                    'key'       => 'field_mm_litter',
-                    'label'     => __( 'Litter', 'mm-sphynx' ),
-                    'name'      => 'litter_id',
-                    'type'      => 'post_object',
-                    'post_type' => [ 'litter' ],
-                    'return_format' => 'id',
-                    'ui'        => 1,
-                    'allow_null'=> 1,
+                    'key'          => 'field_mm_price',
+                    'label'        => __( 'Price (USD)', 'mm-sphynx' ),
+                    'name'         => 'price',
+                    'type'         => 'number',
+                    'wrapper'      => [ 'width' => '20' ],
+                    'prepend'      => '$',
+                    'min'          => 0,
+                    'step'         => 1,
                 ],
                 [
-                    'key'   => 'field_mm_media_gallery',
-                    'label' => __( 'Media Gallery', 'mm-sphynx' ),
-                    'name'  => 'media_gallery',
-                    'type'  => 'gallery',
-                    'preview_size' => 'medium',
+                    'key'          => 'field_mm_sex',
+                    'label'        => __( 'Sex', 'mm-sphynx' ),
+                    'name'         => 'sex',
+                    'type'         => 'select',
+                    'choices'      => [
+                        'male'   => __( 'Male', 'mm-sphynx' ),
+                        'female' => __( 'Female', 'mm-sphynx' ),
+                    ],
+                    'wrapper'      => [ 'width' => '20' ],
                 ],
                 [
-                    'key'        => 'field_mm_video_urls',
-                    'label'      => __( 'Video URLs', 'mm-sphynx' ),
-                    'name'       => 'video_urls',
-                    'type'       => 'repeater',
-                    'collapsed'  => '',
-                    'layout'     => 'table',
+                    'key'          => 'field_mm_color_text',
+                    'label'        => __( 'Color Notes', 'mm-sphynx' ),
+                    'name'         => 'color',
+                    'type'         => 'text',
+                    'instructions' => __( 'Comma separated. Example: "blue, cream, bicolor".', 'mm-sphynx' ),
+                    'wrapper'      => [ 'width' => '20' ],
+                ],
+                [
+                    'key'          => 'field_mm_birthday',
+                    'label'        => __( 'Birthday', 'mm-sphynx' ),
+                    'name'         => 'birthday',
+                    'type'         => 'date_picker',
+                    'display_format' => 'Y-m-d',
+                    'return_format'  => 'Y-m-d',
+                    'first_day'      => 1,
+                    'wrapper'        => [ 'width' => '20' ],
+                ],
+                [
+                    'key'          => 'field_mm_age_hint',
+                    'label'        => __( 'Age Hint', 'mm-sphynx' ),
+                    'name'         => 'age_hint',
+                    'type'         => 'text',
+                    'instructions' => __( 'Friendly age label (e.g., "11 months").', 'mm-sphynx' ),
+                    'wrapper'      => [ 'width' => '20' ],
+                ],
+                [
+                    'key'          => 'field_mm_temperament_tags',
+                    'label'        => __( 'Temperament Tags', 'mm-sphynx' ),
+                    'name'         => 'temperament_tags',
+                    'type'         => 'textarea',
+                    'instructions' => __( 'Semicolon separated tags (e.g., "gentle;affectionate;playful").', 'mm-sphynx' ),
+                    'rows'         => 2,
+                    'wrapper'      => [ 'width' => '40' ],
+                ],
+                [
+                    'key'          => 'field_mm_short_description',
+                    'label'        => __( 'Card Summary', 'mm-sphynx' ),
+                    'name'         => 'short_description',
+                    'type'         => 'textarea',
+                    'rows'         => 3,
+                    'instructions' => __( 'Displayed on grid cards and used as excerpt.', 'mm-sphynx' ),
+                ],
+                [
+                    'key'          => 'field_mm_cover_image',
+                    'label'        => __( 'Cover Image URL', 'mm-sphynx' ),
+                    'name'         => 'cover_image',
+                    'type'         => 'url',
+                    'instructions' => __( 'External or media library URL used for grid thumbnail.', 'mm-sphynx' ),
+                    'wrapper'      => [ 'width' => '50' ],
+                ],
+                [
+                    'key'          => 'field_mm_gallery_urls',
+                    'label'        => __( 'Gallery URLs', 'mm-sphynx' ),
+                    'name'         => 'gallery',
+                    'type'         => 'repeater',
+                    'layout'       => 'table',
+                    'button_label' => __( 'Add Image', 'mm-sphynx' ),
+                    'sub_fields'   => [
+                        [
+                            'key'   => 'field_mm_gallery_url_single',
+                            'label' => __( 'Image URL', 'mm-sphynx' ),
+                            'name'  => 'image_url',
+                            'type'  => 'url',
+                        ],
+                    ],
+                ],
+                [
+                    'key'          => 'field_mm_video_urls',
+                    'label'        => __( 'Video URLs', 'mm-sphynx' ),
+                    'name'         => 'videos',
+                    'type'         => 'repeater',
+                    'layout'       => 'table',
                     'button_label' => __( 'Add Video URL', 'mm-sphynx' ),
-                    'sub_fields' => [
+                    'sub_fields'   => [
                         [
                             'key'   => 'field_mm_video_url_single',
                             'label' => __( 'Video URL', 'mm-sphynx' ),
@@ -343,6 +347,57 @@ function mm_sphynx_register_acf_groups(): void {
                             'type'  => 'url',
                         ],
                     ],
+                ],
+                [
+                    'key'          => 'field_mm_parent_sire',
+                    'label'        => __( 'Sire', 'mm-sphynx' ),
+                    'name'         => 'parent_sire',
+                    'type'         => 'text',
+                    'wrapper'      => [ 'width' => '50' ],
+                ],
+                [
+                    'key'          => 'field_mm_parent_dam',
+                    'label'        => __( 'Dam', 'mm-sphynx' ),
+                    'name'         => 'parent_dam',
+                    'type'         => 'text',
+                    'wrapper'      => [ 'width' => '50' ],
+                ],
+                [
+                    'key'          => 'field_mm_health_notes',
+                    'label'        => __( 'Health Notes', 'mm-sphynx' ),
+                    'name'         => 'health_notes',
+                    'type'         => 'textarea',
+                    'rows'         => 3,
+                ],
+                [
+                    'key'          => 'field_mm_value_points',
+                    'label'        => __( 'Value Points', 'mm-sphynx' ),
+                    'name'         => 'value_points',
+                    'type'         => 'textarea',
+                    'rows'         => 3,
+                ],
+                [
+                    'key'          => 'field_mm_care_profile',
+                    'label'        => __( 'Care Profile', 'mm-sphynx' ),
+                    'name'         => 'care_profile',
+                    'type'         => 'textarea',
+                    'rows'         => 3,
+                ],
+                [
+                    'key'          => 'field_mm_apply_url',
+                    'label'        => __( 'Apply URL Override', 'mm-sphynx' ),
+                    'name'         => 'apply_url',
+                    'type'         => 'url',
+                    'instructions' => __( 'Defaults to /apply?kitten={ID} when empty.', 'mm-sphynx' ),
+                    'wrapper'      => [ 'width' => '50' ],
+                ],
+                [
+                    'key'          => 'field_mm_apply_text',
+                    'label'        => __( 'Apply Button Text', 'mm-sphynx' ),
+                    'name'         => 'apply_text',
+                    'type'         => 'text',
+                    'default_value'=> __( 'Apply for this kitten', 'mm-sphynx' ),
+                    'wrapper'      => [ 'width' => '50' ],
                 ],
                 [
                     'key'     => 'field_mm_featured',
@@ -403,6 +458,13 @@ function mm_sphynx_register_acf_groups(): void {
                     'first_day'      => 1,
                 ],
                 [
+                    'key'   => 'field_mm_due_window',
+                    'label' => __( 'Due Window', 'mm-sphynx' ),
+                    'name'  => 'due_window',
+                    'type'  => 'text',
+                    'instructions' => __( 'Example: 2025-12 ~ 2026-01', 'mm-sphynx' ),
+                ],
+                [
                     'key'   => 'field_mm_born_date',
                     'label' => __( 'Born Date', 'mm-sphynx' ),
                     'name'  => 'born_date',
@@ -423,6 +485,42 @@ function mm_sphynx_register_acf_groups(): void {
                         'retired'  => __( 'Retired', 'mm-sphynx' ),
                     ],
                     'return_format' => 'value',
+                ],
+                [
+                    'key'   => 'field_mm_expected_colors',
+                    'label' => __( 'Expected Colors', 'mm-sphynx' ),
+                    'name'  => 'expected_colors',
+                    'type'  => 'textarea',
+                    'rows'  => 2,
+                    'instructions' => __( 'Separate values with commas or semicolons.', 'mm-sphynx' ),
+                ],
+                [
+                    'key'   => 'field_mm_slots_total',
+                    'label' => __( 'Total Slots', 'mm-sphynx' ),
+                    'name'  => 'slots_total',
+                    'type'  => 'number',
+                    'wrapper' => [ 'width' => '50' ],
+                ],
+                [
+                    'key'   => 'field_mm_policy_highlight',
+                    'label' => __( 'Policy Highlight', 'mm-sphynx' ),
+                    'name'  => 'policy_highlight',
+                    'type'  => 'textarea',
+                    'rows'  => 3,
+                ],
+                [
+                    'key'   => 'field_mm_join_text',
+                    'label' => __( 'Join CTA Text', 'mm-sphynx' ),
+                    'name'  => 'join_text',
+                    'type'  => 'text',
+                    'wrapper' => [ 'width' => '50' ],
+                ],
+                [
+                    'key'   => 'field_mm_join_url',
+                    'label' => __( 'Join CTA URL', 'mm-sphynx' ),
+                    'name'  => 'join_url',
+                    'type'  => 'url',
+                    'wrapper' => [ 'width' => '50' ],
                 ],
                 [
                     'key'   => 'field_mm_litter_note',
@@ -713,6 +811,33 @@ function mm_sphynx_get_status_choices(): array {
     ];
 }
 
+function mm_sphynx_parse_text_list( $value ): array {
+    if ( ! is_string( $value ) ) {
+        return [];
+    }
+
+    $parts = preg_split( '/[,;\n]+/', $value );
+    if ( ! is_array( $parts ) ) {
+        return [];
+    }
+
+    $parts = array_map(
+        static function ( $item ) {
+            return trim( (string) $item );
+        },
+        $parts
+    );
+
+    $parts = array_filter(
+        $parts,
+        static function ( $item ) {
+            return '' !== $item;
+        }
+    );
+
+    return array_values( $parts );
+}
+
 function mm_sphynx_get_forms_registry(): array {
     $registry = get_option( 'mm_sphynx_forms', [] );
     return is_array( $registry ) ? $registry : [];
@@ -749,52 +874,99 @@ function mm_sphynx_get_kitten_dataset(): array {
     if ( $query->have_posts() ) {
         while ( $query->have_posts() ) {
             $query->the_post();
-            $post_id  = get_the_ID();
-            $status   = get_field( 'status', $post_id ) ?: 'available';
-            $price    = get_field( 'price', $post_id );
-            $gallery  = get_field( 'media_gallery', $post_id ) ?: [];
-            $videos   = get_field( 'video_urls', $post_id ) ?: [];
-            $colors   = get_field( 'color', $post_id );
-            $featured = (bool) get_field( 'featured', $post_id );
-            $birth    = get_field( 'birthdate', $post_id );
+            $post_id      = get_the_ID();
+            $kitten_id    = (string) get_field( 'kitten_id', $post_id );
+            $status       = get_field( 'status', $post_id ) ?: 'available';
+            $price        = get_field( 'price', $post_id );
+            $colors_raw   = (string) get_field( 'color', $post_id );
+            $featured     = (bool) get_field( 'featured', $post_id );
+            $birthday     = get_field( 'birthday', $post_id );
+            $age_hint     = (string) get_field( 'age_hint', $post_id );
+            $temperaments = mm_sphynx_parse_text_list( (string) get_field( 'temperament_tags', $post_id ) );
+            $short_desc   = (string) get_field( 'short_description', $post_id );
+            $cover_image  = (string) get_field( 'cover_image', $post_id );
+            $health_notes = (string) get_field( 'health_notes', $post_id );
+            $value_points = mm_sphynx_parse_text_list( (string) get_field( 'value_points', $post_id ) );
+            $care_profile = (string) get_field( 'care_profile', $post_id );
+            $apply_url    = (string) get_field( 'apply_url', $post_id );
+            $apply_text   = (string) get_field( 'apply_text', $post_id );
 
+            $gallery_rows = get_field( 'gallery', $post_id ) ?: [];
             $gallery_urls = [];
-            foreach ( $gallery as $image ) {
-                if ( isset( $image['sizes']['large'] ) ) {
-                    $gallery_urls[] = $image['sizes']['large'];
-                } elseif ( isset( $image['url'] ) ) {
-                    $gallery_urls[] = $image['url'];
+            if ( is_array( $gallery_rows ) ) {
+                foreach ( $gallery_rows as $row ) {
+                    if ( isset( $row['image_url'] ) && $row['image_url'] ) {
+                        $gallery_urls[] = esc_url_raw( $row['image_url'] );
+                    }
                 }
             }
 
+            $video_rows = get_field( 'videos', $post_id ) ?: [];
             $video_urls = [];
-            if ( is_array( $videos ) ) {
-                foreach ( $videos as $video ) {
-                    if ( isset( $video['video_url'] ) && $video['video_url'] ) {
-                        $video_urls[] = esc_url_raw( $video['video_url'] );
+            if ( is_array( $video_rows ) ) {
+                foreach ( $video_rows as $row ) {
+                    if ( isset( $row['video_url'] ) && $row['video_url'] ) {
+                        $video_urls[] = esc_url_raw( $row['video_url'] );
                     }
                 }
+            }
+
+            if ( ! $cover_image && ! empty( $gallery_urls ) ) {
+                $cover_image = $gallery_urls[0];
+            }
+
+            $colors = mm_sphynx_parse_text_list( $colors_raw );
+
+            $age_auto = mm_sphynx_calculate_age_string( $birthday );
+            if ( ! $age_hint && $age_auto ) {
+                $age_hint = $age_auto;
+            }
+
+            if ( ! $short_desc && has_excerpt( $post_id ) ) {
+                $short_desc = get_the_excerpt();
+            }
+
+            if ( ! $apply_url ) {
+                $apply_url = home_url( '/apply' );
+                if ( $kitten_id ) {
+                    $apply_url = add_query_arg( 'kitten', rawurlencode( $kitten_id ), $apply_url );
+                }
+            }
+
+            if ( ! $apply_text ) {
+                $apply_text = __( 'Apply for this kitten', 'mm-sphynx' );
             }
 
             $kitten = [
                 'id'           => $post_id,
                 'title'        => get_the_title(),
                 'permalink'    => get_permalink(),
-                'kitten_id'    => get_field( 'kitten_id', $post_id ),
+                'kitten_id'    => $kitten_id,
                 'sex'          => get_field( 'sex', $post_id ),
-                'color'        => is_array( $colors ) ? array_values( $colors ) : ( $colors ? [ $colors ] : [] ),
-                'personality'  => get_field( 'personality_tags', $post_id ) ?: [],
+                'color'        => $colors,
+                'temperament'  => $temperaments,
                 'price'        => '' !== $price && null !== $price ? (float) $price : null,
                 'status'       => $status,
                 'status_label' => $status_choices[ $status ] ?? ucfirst( $status ),
                 'featured'     => $featured,
-                'litter'       => get_field( 'litter_id', $post_id ),
-                'thumbnail'    => get_the_post_thumbnail_url( $post_id, 'large' ),
+                'thumbnail'    => $cover_image,
+                'cover_image'  => $cover_image,
                 'gallery'      => $gallery_urls,
                 'videos'       => $video_urls,
-                'birthdate'    => $birth,
-                'age'          => mm_sphynx_calculate_age_string( $birth ),
-                'excerpt'      => has_excerpt( $post_id ) ? get_the_excerpt() : '',
+                'birthdate'    => $birthday,
+                'age'          => $age_auto,
+                'age_hint'     => $age_hint,
+                'short_description' => $short_desc,
+                'health_notes' => $health_notes,
+                'value_points' => $value_points,
+                'care_profile' => $care_profile,
+                'parents'      => [
+                    'sire' => (string) get_field( 'parent_sire', $post_id ),
+                    'dam'  => (string) get_field( 'parent_dam', $post_id ),
+                ],
+                'apply_url'    => $apply_url,
+                'apply_text'   => $apply_text,
+                'excerpt'      => $short_desc,
                 'timestamp'    => (int) get_post_time( 'U', true, $post_id ),
             ];
 
@@ -913,22 +1085,48 @@ function mm_sphynx_get_litter_timeline(): array {
             $post_id = get_the_ID();
             $status  = get_field( 'status', $post_id ) ?: 'planned';
 
+            $litter_code = get_field( 'litter_id', $post_id ) ?: get_the_title();
+            $due_window = get_field( 'due_window', $post_id );
+            $expected_colors = mm_sphynx_parse_text_list( (string) get_field( 'expected_colors', $post_id ) );
+
             $timeline[] = [
-                'id'        => $post_id,
-                'title'     => get_field( 'litter_id', $post_id ) ?: get_the_title(),
-                'queen'     => get_field( 'queen', $post_id ),
-                'sire'      => get_field( 'sire', $post_id ),
-                'due_date'  => get_field( 'due_date', $post_id ),
-                'born_date' => get_field( 'born_date', $post_id ),
-                'status'    => $status,
-                'status_label' => $status_choices[ $status ] ?? ucfirst( $status ),
-                'note'      => get_field( 'note', $post_id ),
+                'id'              => $post_id,
+                'title'           => $litter_code,
+                'queen'           => get_field( 'queen', $post_id ),
+                'sire'            => get_field( 'sire', $post_id ),
+                'due_date'        => get_field( 'due_date', $post_id ),
+                'due_window'      => $due_window,
+                'born_date'       => get_field( 'born_date', $post_id ),
+                'status'          => $status,
+                'status_label'    => $status_choices[ $status ] ?? ucfirst( $status ),
+                'expected_colors' => $expected_colors,
+                'slots_total'     => (int) get_field( 'slots_total', $post_id ),
+                'policy_highlight'=> get_field( 'policy_highlight', $post_id ),
+                'join_text'       => get_field( 'join_text', $post_id ) ?: __( 'Join waitlist', 'mm-sphynx' ),
+                'join_url'        => get_field( 'join_url', $post_id ) ?: add_query_arg( 'litter', sanitize_title( $litter_code ), home_url( '/waitlist' ) ),
+                'note'            => get_field( 'note', $post_id ),
             ];
         }
         wp_reset_postdata();
     }
 
     return $timeline;
+}
+
+function mm_sphynx_get_adoption_flow(): array {
+    $steps = get_option( 'mm_sphynx_adoption_flow', [] );
+    if ( ! is_array( $steps ) ) {
+        return [];
+    }
+
+    usort(
+        $steps,
+        static function ( $a, $b ) {
+            return ( $a['order'] ?? 0 ) <=> ( $b['order'] ?? 0 );
+        }
+    );
+
+    return array_values( $steps );
 }
 
 function mm_sphynx_enqueue_kittens_assets(): void {
@@ -959,18 +1157,22 @@ function mm_sphynx_enqueue_kittens_assets(): void {
 
     $dataset = mm_sphynx_get_kitten_dataset();
     $litters = mm_sphynx_get_litter_timeline();
+    $adoption_flow = mm_sphynx_get_adoption_flow();
 
     wp_localize_script(
         'mm-sphynx-kittens',
         'mmSphynxKittens',
         [
-            'kittens' => $dataset['all'],
-            'forms'   => [
+            'kittens'      => $dataset['all'],
+            'forms'        => [
                 'apply'    => mm_sphynx_get_form_id( 'adoption_apply' ),
-                'waitlist' => mm_sphynx_get_form_id( 'adoption_apply' ),
+                'waitlist' => mm_sphynx_get_form_id( 'waitlist' ) ?: mm_sphynx_get_form_id( 'adoption_apply' ),
                 'select'   => mm_sphynx_get_form_id( 'select_kitten' ),
             ],
-            'litters' => $litters,
+            'litters'      => $litters,
+            'adoptionFlow' => $adoption_flow,
+            'waitlistUrl'  => home_url( '/waitlist/' ),
+            'placeholder'  => mm_sphynx_placeholder_image(),
         ]
     );
 }
@@ -1001,6 +1203,10 @@ function mm_sphynx_register_roles(): void {
 
 function mm_sphynx_get_applicant_statuses(): array {
     return [
+        'pending'      => [
+            'label'   => __( 'Pending Review', 'mm-sphynx' ),
+            'message' => __( 'Your dossier reached our guardianship team. Expect a concierge reply within 48 hours.', 'mm-sphynx' ),
+        ],
         'applicant'    => [
             'label'   => __( 'Applicant', 'mm-sphynx' ),
             'message' => __( 'Your dossier reached our guardianship team. Expect a concierge reply within 48 hours.', 'mm-sphynx' ),
@@ -1045,6 +1251,123 @@ function mm_sphynx_get_application_status_label( string $status ): string {
     return $statuses[ $status ]['label'] ?? ucfirst( str_replace( '_', ' ', $status ) );
 }
 
+function mm_sphynx_get_default_email_templates(): array {
+    return [
+        'approve'        => [
+            'subject' => __( 'Your application is approved', 'mm-sphynx' ),
+            'body'    => __( "Dear {name},\n\nGreat news — your application has been approved. Next step: {next_step_link}.\nWe recommend reviewing payment options and policies here: {policies_link}.\n\nWarmly,\nMiss Mermaid · Sphynx", 'mm-sphynx' ),
+        ],
+        'reject'         => [
+            'subject' => __( 'Your application status', 'mm-sphynx' ),
+            'body'    => __( "Dear {name},\n\nThank you for your interest. After careful review, we won’t proceed at this time. You’re welcome to stay on our public updates list.\n\nWarm regards,\nMiss Mermaid · Sphynx", 'mm-sphynx' ),
+        ],
+        'payment_instr'  => [
+            'subject' => __( 'How to complete your payment', 'mm-sphynx' ),
+            'body'    => __( "Hi {name},\n\nYou may pay via Zelle (preferred) or PayPal Friends & Family. Upload proof here: {upload_link}.\nDeposits are $1000; selection usually opens ~8 weeks.\n\n— Team Miss Mermaid", 'mm-sphynx' ),
+        ],
+    ];
+}
+
+function mm_sphynx_get_email_templates(): array {
+    $templates = get_option( 'mm_sphynx_email_templates', [] );
+    if ( ! is_array( $templates ) ) {
+        $templates = [];
+    }
+
+    return array_merge( mm_sphynx_get_default_email_templates(), $templates );
+}
+
+function mm_sphynx_get_email_placeholders( ?\WP_User $user, array $context = [] ): array {
+    $name = '';
+    $kitten_id = $context['kitten_id'] ?? '';
+    $litter_code = $context['litter_code'] ?? '';
+
+    if ( $user instanceof \WP_User ) {
+        if ( $user->display_name ) {
+            $name = $user->display_name;
+        } elseif ( $user->user_email ) {
+            $name = current( explode( '@', $user->user_email ) );
+        }
+
+        $profile = get_user_meta( $user->ID, '_mm_application_profile', true );
+        if ( is_array( $profile ) ) {
+            if ( ! $name && ! empty( $profile['guardian_name'] ) ) {
+                $name = $profile['guardian_name'];
+            }
+            if ( ! $kitten_id && ! empty( $profile['kitten_interest'] ) ) {
+                $kitten_id = $profile['kitten_interest'];
+            }
+        }
+
+        if ( ! $kitten_id ) {
+            $kitten_id = get_user_meta( $user->ID, '_mm_selected_kitten', true );
+        }
+
+        if ( ! $litter_code ) {
+            $litter_code = get_user_meta( $user->ID, '_mm_waitlist_litter', true );
+        }
+    }
+
+    if ( ! $name ) {
+        $name = $context['name'] ?? __( 'Guardian', 'mm-sphynx' );
+    }
+
+    $placeholders = [
+        'name'            => $name,
+        'kitten_id'       => $kitten_id ?: ( $context['kitten_id'] ?? '' ),
+        'litter_code'     => $litter_code ?: ( $context['litter_code'] ?? '' ),
+        'next_step_link'  => $context['next_step_link'] ?? home_url( '/payment/' ),
+        'policies_link'   => $context['policies_link'] ?? home_url( '/policies#payment' ),
+        'upload_link'     => $context['upload_link'] ?? mm_sphynx_get_portal_url(),
+        'portal_link'     => mm_sphynx_get_portal_url(),
+    ];
+
+    return $placeholders;
+}
+
+function mm_sphynx_render_email_template( string $template_key, ?\WP_User $user, array $context = [] ): ?array {
+    $templates = mm_sphynx_get_email_templates();
+    if ( empty( $templates[ $template_key ] ) ) {
+        return null;
+    }
+
+    $template = $templates[ $template_key ];
+    $placeholders = mm_sphynx_get_email_placeholders( $user, $context );
+    $search  = [];
+    $replace = [];
+    foreach ( $placeholders as $key => $value ) {
+        $search[]  = '{' . $key . '}';
+        $replace[] = $value;
+    }
+
+    $subject = str_replace( $search, $replace, $template['subject'] ?? '' );
+    $body    = str_replace( $search, $replace, $template['body'] ?? '' );
+
+    if ( ! $subject || ! $body ) {
+        return null;
+    }
+
+    return [
+        'subject' => $subject,
+        'body'    => $body,
+    ];
+}
+
+function mm_sphynx_send_templated_email( string $template_key, ?\WP_User $user, array $context = [], string $recipient = '' ): bool {
+    $email = mm_sphynx_render_email_template( $template_key, $user, $context );
+    if ( ! $email ) {
+        return false;
+    }
+
+    $to = $recipient ?: ( $user instanceof \WP_User ? $user->user_email : '' );
+    if ( ! $to ) {
+        return false;
+    }
+
+    $headers = [ 'Content-Type: text/plain; charset=UTF-8' ];
+    return (bool) wp_mail( $to, $email['subject'], $email['body'], $headers );
+}
+
 function mm_sphynx_get_status_history( int $user_id ): array {
     $history = get_user_meta( $user_id, '_mm_application_status_history', true );
     if ( ! is_array( $history ) ) {
@@ -1078,6 +1401,17 @@ function mm_sphynx_record_status_history( int $user_id, string $status, string $
 }
 
 function mm_sphynx_send_status_email( \WP_User $user, string $status, array $context = [] ): void {
+    $template_map = [
+        'approved' => 'approve',
+        'rejected' => 'reject',
+    ];
+
+    if ( isset( $template_map[ $status ] ) ) {
+        if ( mm_sphynx_send_templated_email( $template_map[ $status ], $user, $context ) ) {
+            return;
+        }
+    }
+
     $statuses = mm_sphynx_get_applicant_statuses();
     $message  = $statuses[ $status ]['message'] ?? '';
 
@@ -1116,6 +1450,9 @@ function mm_sphynx_send_status_email( \WP_User $user, string $status, array $con
 }
 
 function mm_sphynx_transition_status( int $user_id, string $status, string $note = '', string $actor = 'system', array $context = [] ): bool {
+    if ( 'applicant' === $status ) {
+        $status = 'pending';
+    }
     $statuses = mm_sphynx_get_applicant_statuses();
     if ( ! isset( $statuses[ $status ] ) ) {
         return false;
@@ -1223,7 +1560,9 @@ function mm_sphynx_send_magic_link_email( \WP_User $user, string $url ): void {
 }
 
 function mm_sphynx_handle_magic_request(): void {
-    if ( 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+    $request_method = isset( $_SERVER['REQUEST_METHOD'] ) ? strtoupper( (string) $_SERVER['REQUEST_METHOD'] ) : '';
+
+    if ( 'POST' !== $request_method ) {
         return;
     }
 
@@ -1369,6 +1708,33 @@ function mm_sphynx_magic_login_shortcode( $atts = [] ): string {
     return (string) ob_get_clean();
 }
 
+function mm_sphynx_form_shortcode( $atts = [] ): string {
+    $atts = shortcode_atts(
+        [
+            'slug'     => '',
+            'fallback' => '',
+        ],
+        $atts,
+        'mm_form'
+    );
+
+    $slug = sanitize_key( (string) $atts['slug'] );
+    if ( ! $slug && ! empty( $atts['fallback'] ) ) {
+        $slug = sanitize_key( (string) $atts['fallback'] );
+    }
+
+    if ( ! $slug ) {
+        return '';
+    }
+
+    $form_id = mm_sphynx_get_form_id( $slug );
+    if ( ! $form_id ) {
+        return '';
+    }
+
+    return do_shortcode( '[fluentform id="' . (int) $form_id . '"]' );
+}
+
 function mm_sphynx_get_form_slug_by_id( int $form_id ): ?string {
     $registry = mm_sphynx_get_forms_registry();
     foreach ( $registry as $slug => $id ) {
@@ -1399,6 +1765,79 @@ function mm_sphynx_locate_applicant_user( array $form_data, $entry ): ?\WP_User 
     }
 
     return null;
+}
+
+function mm_sphynx_fetch_or_create_applicant( string $email, array $form_data = [] ): ?\WP_User {
+    if ( ! $email ) {
+        return null;
+    }
+
+    $user = get_user_by( 'email', $email );
+    if ( $user instanceof \WP_User ) {
+        mm_sphynx_ensure_applicant_role( $user );
+        return $user;
+    }
+
+    $raw_base = sanitize_user( current( explode( '@', $email ) ), true );
+    if ( ! $raw_base ) {
+        $raw_base = 'guardian';
+    }
+    $base     = $raw_base;
+    $attempts = 1;
+
+    if ( ! function_exists( 'username_exists' ) ) {
+        require_once ABSPATH . WPINC . '/user.php';
+    }
+
+    while ( username_exists( $base ) ) {
+        $base = $raw_base . '_' . $attempts;
+        $attempts++;
+    }
+
+    $display = sanitize_text_field( $form_data['guardian_name'] ?? '' );
+    $password = wp_generate_password( 24 );
+
+    $user_id = wp_insert_user(
+        [
+            'user_login'   => $base,
+            'user_email'   => $email,
+            'user_pass'    => $password,
+            'role'         => mm_sphynx_get_applicant_role(),
+            'display_name' => $display ?: $email,
+        ]
+    );
+
+    if ( is_wp_error( $user_id ) ) {
+        return null;
+    }
+
+    $user = get_user_by( 'id', (int) $user_id );
+    if ( $user instanceof \WP_User ) {
+        mm_sphynx_ensure_applicant_role( $user );
+        return $user;
+    }
+
+    return null;
+}
+
+function mm_sphynx_maybe_update_display_name( \WP_User $user, string $name ): void {
+    $name = trim( $name );
+    if ( '' === $name ) {
+        return;
+    }
+
+    if ( $user->display_name === $name ) {
+        return;
+    }
+
+    if ( '' === trim( (string) $user->display_name ) || $user->display_name === $user->user_email ) {
+        wp_update_user(
+            [
+                'ID'           => $user->ID,
+                'display_name' => $name,
+            ]
+        );
+    }
 }
 
 function mm_sphynx_ensure_applicant_role( \WP_User $user ): void {
@@ -1433,6 +1872,9 @@ function mm_sphynx_on_form_submission( $entry_id, $form_data, $entry, $form ): v
         case 'adoption_apply':
             mm_sphynx_handle_adoption_application( $form_data, $entry_id, $entry );
             break;
+        case 'waitlist':
+            mm_sphynx_handle_waitlist_submission( $form_data, $entry_id, $entry );
+            break;
         case 'payment_proof':
             mm_sphynx_handle_payment_proof( $form_data, $entry_id, $entry );
             break;
@@ -1453,27 +1895,9 @@ function mm_sphynx_handle_adoption_application( array $form_data, $entry_id, $en
         return;
     }
 
-    $user = get_user_by( 'email', $email );
+    $user = mm_sphynx_locate_applicant_user( $form_data, $entry );
     if ( ! ( $user instanceof \WP_User ) ) {
-        $username = sanitize_user( current( explode( '@', $email ) ) );
-        if ( ! $username ) {
-            $username = 'guardian_' . wp_generate_password( 6, false );
-        }
-        $password = wp_generate_password( 24 );
-        $user_id  = wp_insert_user(
-            [
-                'user_login' => $username,
-                'user_email' => $email,
-                'user_pass'  => $password,
-                'role'       => mm_sphynx_get_applicant_role(),
-                'display_name' => sanitize_text_field( $form_data['guardian_name'] ?? $email ),
-            ]
-        );
-
-        if ( is_wp_error( $user_id ) ) {
-            return;
-        }
-        $user = get_user_by( 'id', $user_id );
+        $user = mm_sphynx_fetch_or_create_applicant( $email, $form_data );
     }
 
     if ( ! ( $user instanceof \WP_User ) ) {
@@ -1481,6 +1905,7 @@ function mm_sphynx_handle_adoption_application( array $form_data, $entry_id, $en
     }
 
     mm_sphynx_ensure_applicant_role( $user );
+    mm_sphynx_maybe_update_display_name( $user, sanitize_text_field( $form_data['guardian_name'] ?? '' ) );
 
     $profile = [
         'guardian_name'       => sanitize_text_field( $form_data['guardian_name'] ?? '' ),
@@ -1503,6 +1928,79 @@ function mm_sphynx_handle_adoption_application( array $form_data, $entry_id, $en
     $link = mm_sphynx_generate_magic_login_url( $user->ID, mm_sphynx_get_portal_url() );
     if ( $link ) {
         mm_sphynx_send_magic_link_email( $user, $link );
+    }
+}
+
+function mm_sphynx_handle_waitlist_submission( array $form_data, $entry_id, $entry ): void {
+    $email = isset( $form_data['email'] ) ? sanitize_email( $form_data['email'] ) : '';
+    if ( ! $email ) {
+        return;
+    }
+
+    $ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : 'unknown';
+    if ( mm_sphynx_throttle( 'waitlist_email_' . md5( strtolower( $email ) ), 3, DAY_IN_SECONDS ) || mm_sphynx_throttle( 'waitlist_ip_' . md5( $ip ), 6, DAY_IN_SECONDS ) ) {
+        return;
+    }
+
+    $user = mm_sphynx_locate_applicant_user( $form_data, $entry );
+    if ( ! ( $user instanceof \WP_User ) ) {
+        $user = mm_sphynx_fetch_or_create_applicant( $email, $form_data );
+    }
+
+    if ( ! ( $user instanceof \WP_User ) ) {
+        return;
+    }
+
+    mm_sphynx_ensure_applicant_role( $user );
+
+    $name  = sanitize_text_field( $form_data['guardian_name'] ?? '' );
+    $phone = sanitize_text_field( $form_data['phone'] ?? '' );
+    $litter = sanitize_text_field( $form_data['litter_code'] ?? '' );
+    $notes  = sanitize_textarea_field( $form_data['notes'] ?? '' );
+
+    mm_sphynx_maybe_update_display_name( $user, $name );
+
+    $profile = array_filter(
+        [
+            'guardian_name'   => $name,
+            'phone'           => $phone,
+            'litter_interest' => $litter,
+            'waitlist_notes'  => $notes,
+        ],
+        static function ( $value ) {
+            return '' !== $value && null !== $value;
+        }
+    );
+
+    if ( $profile ) {
+        mm_sphynx_update_applicant_profile( $user->ID, $profile );
+    }
+
+    if ( $litter ) {
+        update_user_meta( $user->ID, '_mm_waitlist_litter', $litter );
+    }
+
+    update_user_meta( $user->ID, '_mm_waitlist_entry', (int) $entry_id );
+
+    $context = [
+        'litter_code' => $litter,
+    ];
+
+    $note = $litter
+        ? sprintf(
+            /* translators: %s: litter code */
+            __( 'Waitlist request for litter %s.', 'mm-sphynx' ),
+            $litter
+        )
+        : __( 'Waitlist request submitted.', 'mm-sphynx' );
+
+    mm_sphynx_transition_status( $user->ID, 'applicant', $note, 'form', $context );
+
+    if ( ! is_user_logged_in() ) {
+        $link = mm_sphynx_generate_magic_login_url( $user->ID, mm_sphynx_get_portal_url() );
+        if ( $link ) {
+            mm_sphynx_send_magic_link_email( $user, $link );
+        }
     }
 }
 
@@ -1563,6 +2061,7 @@ function mm_sphynx_handle_selection_form( array $form_data, $entry_id, $entry ):
 function mm_sphynx_users_columns( array $columns ): array {
     $columns['mm_status']  = __( 'Adoption Status', 'mm-sphynx' );
     $columns['mm_updated'] = __( 'Status Updated', 'mm-sphynx' );
+    $columns['mm_interest'] = __( 'Interest', 'mm-sphynx' );
     return $columns;
 }
 
@@ -1580,6 +2079,34 @@ function mm_sphynx_users_custom_column( $output, string $column_name, int $user_
                 return $output;
             }
             return esc_html( date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $timestamp ) );
+        case 'mm_interest':
+            $profile = get_user_meta( $user_id, '_mm_application_profile', true );
+            $parts   = [];
+
+            if ( is_array( $profile ) ) {
+                if ( ! empty( $profile['kitten_interest'] ) ) {
+                    $parts[] = sprintf( __( 'Kitten: %s', 'mm-sphynx' ), $profile['kitten_interest'] );
+                }
+                if ( ! empty( $profile['litter_interest'] ) ) {
+                    $parts[] = sprintf( __( 'Litter: %s', 'mm-sphynx' ), $profile['litter_interest'] );
+                }
+            }
+
+            $selected = get_user_meta( $user_id, '_mm_selected_kitten', true );
+            if ( $selected ) {
+                $parts[] = sprintf( __( 'Selected: %s', 'mm-sphynx' ), $selected );
+            }
+
+            $waitlist = get_user_meta( $user_id, '_mm_waitlist_litter', true );
+            if ( $waitlist ) {
+                $parts[] = sprintf( __( 'Waitlist: %s', 'mm-sphynx' ), $waitlist );
+            }
+
+            if ( empty( $parts ) ) {
+                return '&mdash;';
+            }
+
+            return esc_html( implode( ' | ', array_unique( $parts ) ) );
     }
     return $output;
 }
@@ -1593,8 +2120,9 @@ function mm_sphynx_applicant_row_actions( array $actions, \WP_User $user ): arra
         return $actions;
     }
 
-    $status  = get_user_meta( $user->ID, '_mm_application_status', true ) ?: 'applicant';
+    $status  = get_user_meta( $user->ID, '_mm_application_status', true ) ?: 'pending';
     $mapping = [
+        'pending'   => [ 'approve', 'reject' ],
         'applicant' => [ 'approve', 'reject' ],
         'approved'  => [ 'confirm-deposit', 'reject' ],
         'paid_deposit' => [ 'send-contract', 'confirm-full', 'mark-ready' ],
@@ -1672,15 +2200,24 @@ function mm_sphynx_handle_admin_applicant_action(): void {
         return;
     }
 
+    $context = [];
+    if ( 'approved' === $status ) {
+        $context['next_step_link'] = home_url( '/payment/' );
+        $context['policies_link']  = home_url( '/policies#payment' );
+    }
+
+    $current_admin = wp_get_current_user();
+
     $result = mm_sphynx_transition_status(
         $user_id,
         $status,
         sprintf(
             /* translators: %s admin username */
             __( 'Manual status change by %s.', 'mm-sphynx' ),
-            wp_get_current_user()->display_name
+            $current_admin->display_name
         ),
-        'admin'
+        'admin',
+        $context
     );
 
     $message = $result
@@ -1705,25 +2242,98 @@ function mm_sphynx_handle_admin_applicant_action(): void {
 }
 
 function mm_sphynx_admin_notices(): void {
-    $key    = 'mm_admin_notice_' . get_current_user_id();
-    $notice = get_transient( $key );
-    if ( ! $notice ) {
-        return;
+    $user_id = get_current_user_id();
+    $keys    = [
+        'mm_admin_notice_' . $user_id,
+        'mm_bulk_notice_' . $user_id,
+    ];
+
+    foreach ( $keys as $key ) {
+        $notice = get_transient( $key );
+        if ( ! $notice ) {
+            continue;
+        }
+
+        delete_transient( $key );
+
+        $type    = 'success' === ( $notice['type'] ?? '' ) ? 'notice-success' : 'notice-error';
+        $message = $notice['message'] ?? '';
+
+        if ( ! $message ) {
+            continue;
+        }
+        ?>
+        <div class="notice <?php echo esc_attr( $type ); ?> is-dismissible">
+            <p><?php echo esc_html( $message ); ?></p>
+        </div>
+        <?php
+    }
+}
+
+add_filter( 'bulk_actions-users', 'mm_sphynx_register_user_bulk_actions' );
+add_filter( 'handle_bulk_actions-users', 'mm_sphynx_handle_bulk_user_actions', 10, 3 );
+
+function mm_sphynx_register_user_bulk_actions( $actions ) {
+    $actions['mm_bulk_approve'] = __( 'Approve Applications', 'mm-sphynx' );
+    $actions['mm_bulk_reject']  = __( 'Reject Applications', 'mm-sphynx' );
+    return $actions;
+}
+
+function mm_sphynx_handle_bulk_user_actions( $redirect_to, string $doaction, array $user_ids ) {
+    if ( ! in_array( $doaction, [ 'mm_bulk_approve', 'mm_bulk_reject' ], true ) ) {
+        return $redirect_to;
     }
 
-    delete_transient( $key );
-
-    $type    = 'success' === $notice['type'] ? 'notice-success' : 'notice-error';
-    $message = $notice['message'] ?? '';
-
-    if ( ! $message ) {
-        return;
+    if ( empty( $user_ids ) || ! current_user_can( 'list_users' ) ) {
+        return $redirect_to;
     }
-    ?>
-    <div class="notice <?php echo esc_attr( $type ); ?> is-dismissible">
-        <p><?php echo esc_html( $message ); ?></p>
-    </div>
-    <?php
+
+    $status  = 'mm_bulk_approve' === $doaction ? 'approved' : 'rejected';
+    $context = [];
+    if ( 'approved' === $status ) {
+        $context['next_step_link'] = home_url( '/payment/' );
+        $context['policies_link']  = home_url( '/policies#payment' );
+    }
+
+    $actor = wp_get_current_user()->display_name;
+    $count = 0;
+
+    foreach ( $user_ids as $user_id ) {
+        $user_id = absint( $user_id );
+        if ( ! $user_id ) {
+            continue;
+        }
+        $result = mm_sphynx_transition_status(
+            $user_id,
+            $status,
+            sprintf(
+                /* translators: %s admin username */
+                __( 'Bulk status change by %s.', 'mm-sphynx' ),
+                $actor
+            ),
+            'admin',
+            $context
+        );
+
+        if ( $result ) {
+            $count++;
+        }
+    }
+
+    $message = $count
+        ? sprintf( __( 'Updated %d application(s).', 'mm-sphynx' ), $count )
+        : __( 'No applications were updated.', 'mm-sphynx' );
+
+    set_transient(
+        'mm_bulk_notice_' . get_current_user_id(),
+        [
+            'type'    => $count ? 'success' : 'error',
+            'message' => $message,
+        ],
+        MINUTE_IN_SECONDS
+    );
+
+    return $redirect_to;
 }
 
 function mm_sphynx_application_portal_shortcode( $atts = [] ): string {
@@ -1875,8 +2485,14 @@ function mm_sphynx_is_https_request(): bool {
 }
 
 function mm_sphynx_adjust_host_url( string $url ): string {
-    if ( empty( $_SERVER['HTTP_HOST'] ) || ! preg_match( '#^https?://#i', $url ) ) {
+    if ( empty( $_SERVER['HTTP_HOST'] ) ) {
         return $url;
+    }
+
+    if ( ! preg_match( '#^https?://#i', $url ) ) {
+        $scheme = mm_sphynx_is_https_request() ? 'https' : 'http';
+        $path   = 0 === strpos( $url, '/' ) ? $url : '/' . ltrim( $url, '/' );
+        return $scheme . '://' . $_SERVER['HTTP_HOST'] . $path;
     }
 
     $parts = wp_parse_url( $url );
@@ -1965,4 +2581,380 @@ function mm_sphynx_host_aware_navigation_block( $block_content, $block ) {
         },
         $block_content
     );
+}
+
+add_filter( 'rank_math/frontend/canonical', 'mm_sphynx_adjust_canonical_url' );
+add_filter( 'get_canonical_url', 'mm_sphynx_adjust_canonical_url', 10, 2 );
+
+function mm_sphynx_adjust_canonical_url( $canonical, $post = null ) {
+    if ( ! is_string( $canonical ) || '' === $canonical ) {
+        return $canonical;
+    }
+
+    return mm_sphynx_adjust_host_url( $canonical );
+}
+
+add_filter( 'robots_txt', 'mm_sphynx_custom_robots_txt', 10, 2 );
+
+function mm_sphynx_custom_robots_txt( string $output, bool $public ): string {
+    $lines = [
+        'User-agent: *',
+        'Allow: /',
+        'Sitemap: ' . trailingslashit( home_url() ) . 'wp-sitemap.xml',
+    ];
+
+    return implode( "\n", $lines );
+}
+
+add_action( 'wp_head', 'mm_sphynx_output_structured_data', 30 );
+
+function mm_sphynx_output_structured_data(): void {
+    if ( is_admin() || wp_is_json_request() ) {
+        return;
+    }
+
+    $schemas = [];
+
+    $breadcrumb = mm_sphynx_build_breadcrumb_schema();
+    if ( $breadcrumb ) {
+        $schemas[] = $breadcrumb;
+    }
+
+    if ( mm_sphynx_is_kittens_archive_view() ) {
+        $archive_schema = mm_sphynx_build_kittens_itemlist_schema();
+        if ( $archive_schema ) {
+            $schemas[] = $archive_schema;
+        }
+    }
+
+    if ( is_singular( 'kitten' ) ) {
+        $single_schema = mm_sphynx_build_single_kitten_schema();
+        if ( $single_schema ) {
+            $schemas[] = $single_schema;
+        }
+    }
+
+    foreach ( $schemas as $schema ) {
+        echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+    }
+}
+
+function mm_sphynx_is_kittens_archive_view(): bool {
+    if ( is_post_type_archive( 'kitten' ) ) {
+        return true;
+    }
+
+    if ( is_page() ) {
+        $slug = get_post_field( 'post_name', get_queried_object_id() );
+        if ( 'kittens' === $slug ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function mm_sphynx_map_inventory_status( string $status ): string {
+    switch ( $status ) {
+        case 'available':
+            return 'https://schema.org/InStock';
+        case 'reserved':
+            return 'https://schema.org/LimitedAvailability';
+        case 'upcoming':
+            return 'https://schema.org/PreOrder';
+        default:
+            return 'https://schema.org/OutOfStock';
+    }
+}
+
+function mm_sphynx_build_product_schema_from_kitten( array $kitten ): array {
+    $name = $kitten['kitten_id'] ?: ( $kitten['title'] ?? '' );
+    $images = [];
+
+    if ( ! empty( $kitten['cover_image'] ) ) {
+        $images[] = mm_sphynx_adjust_host_url( $kitten['cover_image'] );
+    }
+
+    if ( ! empty( $kitten['gallery'] ) && is_array( $kitten['gallery'] ) ) {
+        foreach ( $kitten['gallery'] as $gallery_url ) {
+            $images[] = mm_sphynx_adjust_host_url( $gallery_url );
+        }
+    }
+
+    $images = array_values( array_unique( array_filter( $images ) ) );
+
+    $raw_url     = $kitten['permalink'] ?? ( isset( $kitten['id'] ) ? get_permalink( $kitten['id'] ) : home_url( '/kittens/' ) );
+    $product_url = mm_sphynx_adjust_host_url( $raw_url );
+
+    $product = [
+        '@type'        => 'Product',
+        'name'         => $name,
+        'sku'          => $kitten['kitten_id'] ?: '',
+        'url'          => $product_url,
+        'description'  => $kitten['short_description'] ?: $kitten['excerpt'] ?: '',
+        'brand'        => [
+            '@type' => 'Organization',
+            'name'  => 'Miss Mermaid Sphynx',
+            'url'   => home_url( '/' ),
+        ],
+    ];
+
+    if ( $images ) {
+        $product['image'] = $images;
+    }
+
+    $price = $kitten['price'] ?? null;
+    $offer = [
+        '@type'           => 'Offer',
+        'availability'    => mm_sphynx_map_inventory_status( $kitten['status'] ?? '' ),
+        'priceCurrency'   => 'USD',
+        'url'             => $product_url,
+        'seller'          => [
+            '@type' => 'Organization',
+            'name'  => 'Miss Mermaid Sphynx',
+            'url'   => home_url( '/' ),
+        ],
+    ];
+
+    if ( is_numeric( $price ) && $price > 0 ) {
+        $offer['price'] = number_format( (float) $price, 2, '.', '' );
+    }
+
+    if ( ! empty( $kitten['status'] ) && 'adopted' === $kitten['status'] ) {
+        $offer['availability'] = 'https://schema.org/SoldOut';
+    }
+
+    $product['offers'] = $offer;
+
+    if ( ! empty( $kitten['age_hint'] ) ) {
+        $product['additionalProperty'][] = [
+            '@type' => 'PropertyValue',
+            'name'  => 'Age',
+            'value' => $kitten['age_hint'],
+        ];
+    }
+
+    if ( ! empty( $kitten['parents']['sire'] ) || ! empty( $kitten['parents']['dam'] ) ) {
+        $lineage = [];
+        if ( ! empty( $kitten['parents']['sire'] ) ) {
+            $lineage[] = 'Sire: ' . $kitten['parents']['sire'];
+        }
+        if ( ! empty( $kitten['parents']['dam'] ) ) {
+            $lineage[] = 'Dam: ' . $kitten['parents']['dam'];
+        }
+        $product['additionalProperty'][] = [
+            '@type' => 'PropertyValue',
+            'name'  => 'Lineage',
+            'value' => implode( ' · ', $lineage ),
+        ];
+    }
+
+    return $product;
+}
+
+function mm_sphynx_build_kittens_itemlist_schema(): ?array {
+    $dataset = mm_sphynx_get_kitten_dataset();
+    $kittens = $dataset['all'] ?? [];
+    if ( empty( $kittens ) ) {
+        return null;
+    }
+
+    $elements = [];
+    $position = 1;
+    foreach ( $kittens as $kitten ) {
+        $product_schema = mm_sphynx_build_product_schema_from_kitten( $kitten );
+        $elements[]     = [
+            '@type'    => 'ListItem',
+            'position' => $position++,
+            'item'     => $product_schema,
+        ];
+    }
+
+    return [
+        '@context'        => 'https://schema.org',
+        '@type'           => 'ItemList',
+        'name'            => 'Miss Mermaid Sphynx Kittens',
+        'itemListElement' => $elements,
+    ];
+}
+
+function mm_sphynx_build_single_kitten_schema(): ?array {
+    $post_id   = get_the_ID();
+    $kitten_id = get_field( 'kitten_id', $post_id );
+    $status    = get_field( 'status', $post_id ) ?: 'available';
+    $price     = get_field( 'price', $post_id );
+
+    $kitten = [
+        'id'                => $post_id,
+        'kitten_id'         => $kitten_id ?: get_the_title( $post_id ),
+        'title'             => get_the_title( $post_id ),
+        'cover_image'       => get_field( 'cover_image', $post_id ),
+        'gallery'           => [],
+        'short_description' => get_field( 'short_description', $post_id ) ?: wp_strip_all_tags( get_the_excerpt( $post_id ) ),
+        'price'             => $price,
+        'status'            => $status,
+        'age_hint'          => get_field( 'age_hint', $post_id ),
+        'parents'           => [
+            'sire' => get_field( 'parent_sire', $post_id ),
+            'dam'  => get_field( 'parent_dam', $post_id ),
+        ],
+    ];
+
+    $gallery_rows = get_field( 'gallery', $post_id );
+    if ( is_array( $gallery_rows ) ) {
+        foreach ( $gallery_rows as $row ) {
+            if ( ! empty( $row['image_url'] ) ) {
+                $kitten['gallery'][] = $row['image_url'];
+            }
+        }
+    }
+
+    $images = array_values(
+        array_unique(
+            array_filter(
+                array_map(
+                    'mm_sphynx_adjust_host_url',
+                    array_merge(
+                        $kitten['cover_image'] ? [ $kitten['cover_image'] ] : [],
+                        $kitten['gallery']
+                    )
+                )
+            )
+        )
+    );
+
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type'    => 'Product',
+        'name'     => $kitten['kitten_id'],
+        'sku'      => $kitten['kitten_id'],
+        'description' => $kitten['short_description'],
+        'brand'       => [
+            '@type' => 'Organization',
+            'name'  => 'Miss Mermaid Sphynx',
+            'url'   => home_url( '/' ),
+        ],
+        'offers'      => array_filter(
+            [
+                '@type'         => 'Offer',
+                'priceCurrency' => 'USD',
+                'price'         => ( is_numeric( $kitten['price'] ) && $kitten['price'] > 0 ) ? number_format( (float) $kitten['price'], 2, '.', '' ) : null,
+                'availability'  => mm_sphynx_map_inventory_status( $kitten['status'] ),
+                'url'           => get_permalink( $post_id ),
+                'seller'        => [
+                    '@type' => 'Organization',
+                    'name'  => 'Miss Mermaid Sphynx',
+                    'url'   => home_url( '/' ),
+                ],
+            ]
+        ),
+    ];
+
+    if ( ! empty( $images ) ) {
+        $schema['image'] = $images;
+    }
+
+    return $schema;
+}
+
+function mm_sphynx_build_breadcrumb_schema(): ?array {
+    $items = [];
+    $position = 1;
+
+    $items[] = [
+        '@type'    => 'ListItem',
+        'position' => $position++,
+        'name'     => __( 'Home', 'mm-sphynx' ),
+        'item'     => home_url( '/' ),
+    ];
+
+    if ( is_front_page() || is_home() && ! get_option( 'page_for_posts' ) ) {
+        return [
+            '@context'        => 'https://schema.org',
+            '@type'           => 'BreadcrumbList',
+            'itemListElement' => $items,
+        ];
+    }
+
+    if ( is_home() ) {
+        $blog_page = get_option( 'page_for_posts' );
+        if ( $blog_page ) {
+            $items[] = [
+                '@type'    => 'ListItem',
+                'position' => $position++,
+                'name'     => get_the_title( $blog_page ),
+                'item'     => get_permalink( $blog_page ),
+            ];
+        }
+    } elseif ( is_singular() ) {
+        if ( is_singular( 'kitten' ) ) {
+            $items[] = [
+                '@type'    => 'ListItem',
+                'position' => $position++,
+                'name'     => __( 'Available Kittens', 'mm-sphynx' ),
+                'item'     => home_url( '/kittens/' ),
+            ];
+        } elseif ( 'post' === get_post_type() ) {
+            $blog_page = get_option( 'page_for_posts' );
+            if ( $blog_page ) {
+                $items[] = [
+                    '@type'    => 'ListItem',
+                    'position' => $position++,
+                    'name'     => get_the_title( $blog_page ),
+                    'item'     => get_permalink( $blog_page ),
+                ];
+            } else {
+                $items[] = [
+                    '@type'    => 'ListItem',
+                    'position' => $position++,
+                    'name'     => __( 'Blog', 'mm-sphynx' ),
+                    'item'     => home_url( '/blog/' ),
+                ];
+            }
+        } elseif ( is_page() ) {
+            $ancestors = array_reverse( get_post_ancestors( get_the_ID() ) );
+            foreach ( $ancestors as $ancestor_id ) {
+                $items[] = [
+                    '@type'    => 'ListItem',
+                    'position' => $position++,
+                    'name'     => get_the_title( $ancestor_id ),
+                    'item'     => get_permalink( $ancestor_id ),
+                ];
+            }
+        }
+
+        $items[] = [
+            '@type'    => 'ListItem',
+            'position' => $position++,
+            'name'     => get_the_title(),
+            'item'     => get_permalink(),
+        ];
+    } elseif ( mm_sphynx_is_kittens_archive_view() ) {
+        $items[] = [
+            '@type'    => 'ListItem',
+            'position' => $position++,
+            'name'     => __( 'Available Kittens', 'mm-sphynx' ),
+            'item'     => home_url( '/kittens/' ),
+        ];
+    } elseif ( is_post_type_archive() ) {
+        $items[] = [
+            '@type'    => 'ListItem',
+            'position' => $position++,
+            'name'     => post_type_archive_title( '', false ),
+            'item'     => home_url( '/' . get_query_var( 'post_type' ) . '/' ),
+        ];
+    } elseif ( is_archive() ) {
+        $items[] = [
+            '@type'    => 'ListItem',
+            'position' => $position++,
+            'name'     => wp_get_document_title(),
+            'item'     => esc_url( home_url( add_query_arg( null, null ) ) ),
+        ];
+    }
+
+    return [
+        '@context'        => 'https://schema.org',
+        '@type'           => 'BreadcrumbList',
+        'itemListElement' => $items,
+    ];
 }

@@ -1,0 +1,23 @@
+<svg width="720" height="540" viewBox="0 0 720 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Image placeholder</title>
+  <desc id="desc">Stylised frame with paw print icon indicating missing media</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1c26"/>
+      <stop offset="100%" stop-color="#0b0b0f"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="540" rx="24" fill="url(#bg)" />
+  <rect x="24" y="24" width="672" height="492" rx="20" fill="none" stroke="#3b3d49" stroke-width="4" stroke-dasharray="16 16"/>
+  <g transform="translate(360 270)">
+    <circle r="68" fill="#262835" />
+    <circle r="52" fill="#2f3140" />
+    <g fill="#c6a15b">
+      <circle cx="-28" cy="-32" r="16"/>
+      <circle cx="28" cy="-32" r="16"/>
+      <circle cx="-40" cy="0" r="15"/>
+      <circle cx="40" cy="0" r="15"/>
+      <path d="M0 16c-30 0-54 24-54 54 0 6 5 11 11 11h86c6 0 11-5 11-11 0-30-24-54-54-54z"/>
+    </g>
+  </g>
+</svg>

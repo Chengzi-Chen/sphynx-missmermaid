@@ -1,0 +1,226 @@
+{
+  "achievements": [
+    {
+      "year": "2018",
+      "title_en": "First World Title",
+      "description_en": "Best in Show — launched Miss Mermaid onto the global stage.",
+      "media_ref": "/media/ach/2018.jpg",
+      "judge_quote_en": "“Immaculate skin and balance.”",
+      "doc_ref": "/docs/2018-score.pdf",
+      "notes_cn": null
+    },
+    {
+      "year": "2022",
+      "title_en": "Global Podiums",
+      "description_en": "Three queens rank top three worldwide.",
+      "media_ref": "/media/ach/2022.jpg",
+      "judge_quote_en": "“Structure and temperament in harmony.”",
+      "doc_ref": "/docs/2022-results.pdf",
+      "notes_cn": null
+    },
+    {
+      "year": "2024",
+      "title_en": "Wellness Retreat",
+      "description_en": "Guardianship retreat with wellness labs and alumni suites.",
+      "media_ref": "/media/ach/2024.jpg",
+      "judge_quote_en": null,
+      "doc_ref": null,
+      "notes_cn": null
+    }
+  ],
+  "gallery_albums": [
+    {
+      "album_key": "champions",
+      "album_title_en": "Champion Portraits",
+      "description_en": "CFA‑level portraits of queens and studs.",
+      "cover": "/media/gallery/champions/cover.jpg",
+      "notes_cn": null
+    },
+    {
+      "album_key": "kittens",
+      "album_title_en": "Kitten Diaries",
+      "description_en": "Seasonal diaries and milestones.",
+      "cover": "/media/gallery/kittens/cover.jpg",
+      "notes_cn": null
+    },
+    {
+      "album_key": "art",
+      "album_title_en": "Miss Mermaid · Art",
+      "description_en": "Original Sphynx‑inspired artworks.",
+      "cover": "/media/gallery/art/cover.jpg",
+      "notes_cn": null
+    }
+  ],
+  "gallery_items": [
+    {
+      "album_key": "champions",
+      "order": 1,
+      "media_ref": "/media/gallery/champions/1.jpg",
+      "caption_en": "Loki — NW sire",
+      "notes_cn": null
+    },
+    {
+      "album_key": "kittens",
+      "order": 1,
+      "media_ref": "/media/gallery/kittens/1.jpg",
+      "caption_en": "First bath training",
+      "notes_cn": null
+    },
+    {
+      "album_key": "art",
+      "order": 1,
+      "media_ref": "/media/gallery/art/1.jpg",
+      "caption_en": "Gold‑on‑black ink study",
+      "notes_cn": null
+    }
+  ],
+  "guides": [
+    {
+      "section_key": "bathing",
+      "order": 1,
+      "title_en": "Bathing & Skin Care",
+      "body_copy_en": "Gentle weekly bath; avoid harsh shampoos; moisturize; clean ears and nails.",
+      "media_ref": "/media/guides/bath.jpg",
+      "notes_cn": null
+    },
+    {
+      "section_key": "nutrition",
+      "order": 2,
+      "title_en": "Nutrition & Health",
+      "body_copy_en": "High‑quality protein and hydration; regular vet visits; annual HCM screenings.",
+      "media_ref": "/media/guides/nutrition.jpg",
+      "notes_cn": null
+    },
+    {
+      "section_key": "temperature",
+      "order": 3,
+      "title_en": "Temperature & Comfort",
+      "body_copy_en": "Warm spots, heated pads on low, breathable covers, sun‑safe sweaters.",
+      "media_ref": "/media/guides/temp.jpg",
+      "notes_cn": null
+    }
+  ],
+  "faq": [
+    {
+      "question_en": "Are Sphynx cats hypoallergenic?",
+      "answer_en": "Less dander than coated breeds, but not fully hypoallergenic. Regular bathing and sheet changes help.",
+      "notes_cn": "FAQ 架构化",
+      "schema_yes_no": "yes"
+    },
+    {
+      "question_en": "Do Sphynx get cold easily?",
+      "answer_en": "They crave warmth at rest; layer clothing and keep cozy beds.",
+      "notes_cn": null,
+      "schema_yes_no": "yes"
+    },
+    {
+      "question_en": "How often to bathe?",
+      "answer_en": "About once a week or as needed; rinse thoroughly and moisturize.",
+      "notes_cn": null,
+      "schema_yes_no": "yes"
+    }
+  ],
+  "blog": [
+    {
+      "slug": "show-diary",
+      "title_en": "Inside a CFA Finals Weekend",
+      "excerpt_en": "Travel, prep, and ring‑by‑ring highlights.",
+      "hero_ref": "/media/blog/show.jpg",
+      "section_1_title": "Packing for Success",
+      "section_1_body": "Our grooming kit and nutrition plan before travel.",
+      "section_2_title": "In the Ring",
+      "section_2_body": "What judges look for in balance and expression.",
+      "section_3_title": "Recovery & Care",
+      "section_3_body": "Post‑show rest, hydration, and bonding.",
+      "cta_text": "Explore Achievements",
+      "cta_link": "/achievements",
+      "notes_cn": null
+    },
+    {
+      "slug": "grooming-rituals",
+      "title_en": "Show‑Ready Grooming at Home",
+      "excerpt_en": "Weekly ritual that keeps skins luminous and calm.",
+      "hero_ref": "/media/blog/groom.jpg",
+      "section_1_title": "Bath Blueprint",
+      "section_1_body": "Step‑by‑step routine with products.",
+      "section_2_title": "Nail & Ear Care",
+      "section_2_body": "Quick checks keep details immaculate.",
+      "section_3_title": "Comfort Layering",
+      "section_3_body": "Sweaters and bedding for seasons.",
+      "cta_text": "Read Guides",
+      "cta_link": "/guides",
+      "notes_cn": null
+    },
+    {
+      "slug": "alumni-first-month",
+      "title_en": "Alumni Diaries: First Month",
+      "excerpt_en": "What new guardians experience in the first 30 days.",
+      "hero_ref": "/media/blog/alumni.jpg",
+      "section_1_title": "Week 1",
+      "section_1_body": "Settling and litter habits.",
+      "section_2_title": "Week 2–3",
+      "section_2_body": "Play, nutrition tweaks, and bonding.",
+      "section_3_title": "Week 4",
+      "section_3_body": "Vet check and milestone photos.",
+      "cta_text": "Apply Now",
+      "cta_link": "/kittens?tab=available",
+      "notes_cn": null
+    }
+  ],
+  "policies": [
+    {
+      "page": "Policies",
+      "section_title_en": "Adoption & Deposit",
+      "body_en": "Deposit $1000 secures priority. If no match, deposit rolls to next litter. Health contingency rules apply.",
+      "notes_cn": "条款摘要"
+    },
+    {
+      "page": "Policies",
+      "section_title_en": "Payment Methods",
+      "body_en": "Zelle preferred; PayPal Friends & Family. Upload proof within 24h.",
+      "notes_cn": "支付方式"
+    },
+    {
+      "page": "Policies",
+      "section_title_en": "Transport",
+      "body_en": "LA area delivery free within 2 hours. Fly‑in pickup supported. No cargo for Sphynx.",
+      "notes_cn": "运输"
+    }
+  ],
+  "terms": [
+    {
+      "page": "Terms",
+      "section_title_en": "Use of Site",
+      "body_en": "Content ownership and acceptable use.",
+      "notes_cn": null
+    }
+  ],
+  "privacy": [
+    {
+      "page": "Privacy",
+      "section_title_en": "Data",
+      "body_en": "We store application basics to process requests. No sale of personal data.",
+      "notes_cn": null
+    }
+  ],
+  "contact": [
+    {
+      "channel": "email",
+      "value": "info@missmermaidcat.com",
+      "link": "info@missmermaidcat.com",
+      "notes_cn": "公开邮箱"
+    },
+    {
+      "channel": "instagram",
+      "value": "Instagram",
+      "link": "https://instagram.com/",
+      "notes_cn": "链接"
+    },
+    {
+      "channel": "youtube",
+      "value": "YouTube",
+      "link": "https://youtube.com/",
+      "notes_cn": "链接"
+    }
+  ]
+}

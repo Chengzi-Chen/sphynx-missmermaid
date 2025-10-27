@@ -1,0 +1,404 @@
+{
+  "home": [
+    {
+      "order": 1,
+      "title": "Different is Beautiful",
+      "body": "World-Champion Sphynx Cats bred ethically and artistically in Los Angeles. Experience health, harmony, and beauty redefined.",
+      "cta1_text": "Start Adoption Journey",
+      "cta1_link": "/kittens",
+      "media_ref": "media/home/hero.jpg",
+      "section_key": "hero",
+      "subtitle": ""
+    },
+    {
+      "order": 2,
+      "title": "Champion Pedigrees",
+      "body": "Our Sphynx cats descend from CFA & TICA champions, combining perfect structure, temperament, and health.",
+      "cta1_text": "See Achievements",
+      "cta1_link": "/achievements",
+      "media_ref": "media/home/highlight1.jpg",
+      "section_key": "trust_01"
+    },
+    {
+      "order": 3,
+      "title": "Ethical Breeding",
+      "body": "We combine science, love, and artistry to raise confident, affectionate companions.",
+      "cta1_text": "Learn About Us",
+      "cta1_link": "/about",
+      "media_ref": "media/home/highlight2.jpg",
+      "section_key": "trust_02"
+    },
+    {
+      "order": 4,
+      "title": "Your Companion Awaits",
+      "body": "Meet our available kittens or join our waitlist for upcoming litters.",
+      "cta1_text": "Explore Kittens",
+      "cta1_link": "/kittens",
+      "media_ref": "media/home/cta.jpg",
+      "section_key": "cta_band"
+    }
+  ],
+  "about": [
+    {
+      "section_key": "about-intro",
+      "order": 1,
+      "heading": "About Miss Mermaid",
+      "body": "Miss Mermaid Cattery was founded to elevate the Sphynx breed through art, ethics, and scientific care. Every cat here is a living sculpture, nurtured with warmth and respect.\n\n““Beauty is born from care, not chance.””",
+      "media_ref": "media/about/intro.jpg"
+    },
+    {
+      "section_key": "philosophy",
+      "order": 2,
+      "heading": "Our Breeding Philosophy",
+      "body": "We breed selectively, focusing on structure, temperament, and health—not just looks. Ethics and artistry guide our choices.",
+      "media_ref": "media/about/philosophy.jpg"
+    },
+    {
+      "section_key": "bloodlines",
+      "order": 3,
+      "heading": "World-Class Bloodlines",
+      "body": "Our cats carry lines from multiple CFA Best Sphynx and NW winners. All breeding cats are DNA-tested and HCM-clear.",
+      "media_ref": "media/about/bloodlines.jpg"
+    },
+    {
+      "section_key": "daily-life",
+      "order": 4,
+      "heading": "Life at Miss Mermaid",
+      "body": "Our Sphynx enjoy open rooms, enrichment play, and family life—never cages. Love, sunlight, and cleanliness define their world.",
+      "media_ref": "media/about/life.jpg"
+    }
+  ],
+  "kittens": [
+    {
+      "kitten_id": "MM001",
+      "status": "available",
+      "price": 4800.0,
+      "sex": "female",
+      "color": "White",
+      "age_hint": "4 months",
+      "temperament_tags": "Calm; affectionate",
+      "short_desc_en": "A gentle, affectionate kitten with radiant skin and soft wrinkles.",
+      "thumbnail": "media/kittens/aurora.jpg",
+      "gallery_refs": "media/kittens/aurora.jpg"
+    },
+    {
+      "kitten_id": "MM002",
+      "status": "reserved",
+      "price": 4500.0,
+      "sex": "male",
+      "color": "Blue bicolor",
+      "age_hint": "5 months",
+      "temperament_tags": "Playful; curious",
+      "short_desc_en": "Playful boy with confident personality, great with families.",
+      "thumbnail": "media/kittens/loki.jpg",
+      "gallery_refs": "media/kittens/loki.jpg"
+    }
+  ],
+  "kitten_details": {
+    "MM001": {
+      "apply_button_text": "Apply for this kitten",
+      "apply_target": "/apply?kitten=MM001",
+      "parents_sire": "",
+      "parents_dam": "",
+      "health_notes_en": "",
+      "value_points_en": "",
+      "care_profile_en": "",
+      "video_refs": ""
+    },
+    "MM002": {
+      "apply_button_text": "Apply for this kitten",
+      "apply_target": "/apply?kitten=MM002",
+      "parents_sire": "",
+      "parents_dam": "",
+      "health_notes_en": "",
+      "value_points_en": "",
+      "care_profile_en": "",
+      "video_refs": ""
+    }
+  },
+  "adoption_flow": [
+    {
+      "key": "apply",
+      "order": 1,
+      "title": "Submit Application",
+      "copy": "Tell us about yourself and your home to ensure a good match.",
+      "icon": "icons/apply.svg",
+      "cta_text": "Apply Now",
+      "cta_target": "/apply"
+    },
+    {
+      "key": "review",
+      "order": 2,
+      "title": "Breeder Review",
+      "copy": "We review every application carefully to protect our kittens' welfare.",
+      "icon": "icons/review.svg",
+      "cta_text": "",
+      "cta_target": ""
+    },
+    {
+      "key": "payment",
+      "order": 3,
+      "title": "Secure with Deposit",
+      "copy": "Once approved, send $1000 deposit via Zelle or PayPal F&F.",
+      "icon": "icons/payment.svg",
+      "cta_text": "",
+      "cta_target": ""
+    },
+    {
+      "key": "contract",
+      "order": 4,
+      "title": "Sign Agreement",
+      "copy": "Sign your adoption contract and receive digital documents.",
+      "icon": "icons/contract.svg",
+      "cta_text": "",
+      "cta_target": ""
+    },
+    {
+      "key": "pickup",
+      "order": 5,
+      "title": "Pick Up or Delivery",
+      "copy": "Schedule your pickup or hand-delivery in LA area. No cargo shipping for Sphynx.",
+      "icon": "icons/pickup.svg",
+      "cta_text": "",
+      "cta_target": ""
+    }
+  ],
+  "achievements": [
+    {
+      "year": "2023",
+      "title_en": "Best Sphynx — Wanda",
+      "description_en": "CFA International · Rank #1",
+      "judge_quote_en": "“Impeccable structure and confidence.”",
+      "media_ref": "media/achievements/2023.jpg",
+      "doc_ref": ""
+    },
+    {
+      "year": "2024",
+      "title_en": "NW Winner — Yoda",
+      "description_en": "CFA Regional · Rank Top 3",
+      "judge_quote_en": "“Perfect harmony between muscle tone and grace.”",
+      "media_ref": "media/achievements/2024.jpg",
+      "doc_ref": ""
+    }
+  ],
+  "gallery": {
+    "albums": [
+      {
+        "album_key": "champions",
+        "album_title_en": "Champions",
+        "description_en": "",
+        "cover": "media/gallery/champion1.jpg",
+        "order": 1
+      },
+      {
+        "album_key": "kittens",
+        "album_title_en": "Kittens",
+        "description_en": "",
+        "cover": "media/gallery/kitten1.jpg",
+        "order": 2
+      },
+      {
+        "album_key": "artworks",
+        "album_title_en": "Artworks",
+        "description_en": "",
+        "cover": "media/gallery/art1.jpg",
+        "order": 3
+      }
+    ],
+    "items": [
+      {
+        "album_key": "champions",
+        "order": 1,
+        "media_ref": "media/gallery/champion1.jpg",
+        "caption_en": "Wanda — CFA Best Sphynx 2023"
+      },
+      {
+        "album_key": "kittens",
+        "order": 2,
+        "media_ref": "media/gallery/kitten1.jpg",
+        "caption_en": "Playful kittens from our latest litter."
+      },
+      {
+        "album_key": "artworks",
+        "order": 3,
+        "media_ref": "media/gallery/art1.jpg",
+        "caption_en": "Original Sphynx-themed artworks by Miss Mermaid."
+      }
+    ]
+  },
+  "guides": [
+    {
+      "order": 1,
+      "title": "How to bathe a Sphynx?",
+      "body": "Use warm water and gentle, fragrance-free baby soap weekly.",
+      "media_ref": "media/guides/bath.jpg"
+    },
+    {
+      "order": 2,
+      "title": "What should they eat?",
+      "body": "High-protein wet food, avoid grains; hydration is essential.",
+      "media_ref": "media/guides/food.jpg"
+    }
+  ],
+  "faq": [
+    {
+      "order": 3,
+      "question": "Are Sphynx cats hypoallergenic?",
+      "answer": "They produce less dander but still cause mild allergies to some.",
+      "schema": true
+    }
+  ],
+  "blog": [
+    {
+      "slug": "b01",
+      "title_en": "Show Preparation 101",
+      "excerpt_en": "How we prepare our cats for CFA shows.",
+      "hero_ref": "media/blog/show.jpg",
+      "sections": [
+        {
+          "title": "",
+          "body": "Detailed grooming, diet, and confidence training process."
+        }
+      ],
+      "cta_text": "",
+      "cta_link": ""
+    },
+    {
+      "slug": "b02",
+      "title_en": "Caring for Kittens",
+      "excerpt_en": "Essential steps for raising a healthy Sphynx kitten.",
+      "hero_ref": "media/blog/kitten.jpg",
+      "sections": [
+        {
+          "title": "",
+          "body": "Nutrition, temperature, and hygiene tips."
+        }
+      ],
+      "cta_text": "",
+      "cta_link": ""
+    }
+  ],
+  "seo": [
+    {
+      "route": "/",
+      "title_en": "Miss Mermaid Sphynx — Champion Sphynx Cattery in Los Angeles",
+      "meta_description_en": "Champion-bred Sphynx cats raised ethically and artistically.",
+      "primary_keyword": "sphynx breeder",
+      "secondary_keywords": "champion sphynx, cattery",
+      "og_image": ""
+    },
+    {
+      "route": "/about",
+      "title_en": "About Miss Mermaid — Ethical Sphynx Breeding",
+      "meta_description_en": "Learn our philosophy, health standards, and champion heritage.",
+      "primary_keyword": "sphynx philosophy",
+      "secondary_keywords": "sphynx health",
+      "og_image": ""
+    },
+    {
+      "route": "/kittens",
+      "title_en": "Available Sphynx Kittens — Miss Mermaid",
+      "meta_description_en": "Browse our available kittens and waitlist options.",
+      "primary_keyword": "available sphynx kittens",
+      "secondary_keywords": "adoption",
+      "og_image": ""
+    }
+  ],
+  "navigation": {
+    "primary": [
+      {
+        "label": "Home",
+        "link": "/"
+      },
+      {
+        "label": "About",
+        "link": "/about"
+      },
+      {
+        "label": "Kittens",
+        "link": "/kittens"
+      },
+      {
+        "label": "Achievements",
+        "link": "/achievements"
+      },
+      {
+        "label": "Gallery",
+        "link": "/gallery"
+      },
+      {
+        "label": "Guides",
+        "link": "/guides"
+      },
+      {
+        "label": "Blog",
+        "link": "/blog"
+      },
+      {
+        "label": "Contact",
+        "link": "/contact"
+      }
+    ],
+    "footer": [
+      {
+        "label": "Apply",
+        "link": "/apply"
+      },
+      {
+        "label": "Waitlist",
+        "link": "/kittens?tab=waitlist"
+      },
+      {
+        "label": "Policies",
+        "link": "/policies"
+      },
+      {
+        "label": "Terms",
+        "link": "/terms"
+      },
+      {
+        "label": "Privacy",
+        "link": "/privacy"
+      },
+      {
+        "label": "Sitemap",
+        "link": "/sitemap_index.xml"
+      }
+    ]
+  },
+  "policies": [
+    {
+      "section_title_en": "Reservation & Deposits",
+      "body_en": "Approved guardians secure their kitten with a non-refundable deposit that is applied to the final adoption balance. Deposits confirm your nursery placement and hold the kitten for seven days while logistics are coordinated."
+    },
+    {
+      "section_title_en": "Health Standards & Guarantee",
+      "body_en": "Every Miss Mermaid Sphynx receives veterinary clearance, HCM-focused cardiac screening, vaccinations, and parasite prevention before departure. Guardians receive medical records and a two-year congenital health guarantee."
+    },
+    {
+      "section_title_en": "Travel & Handover",
+      "body_en": "Kittens may be collected in Los Angeles or delivered by licensed pet courier. Temperature-controlled travel crates, care kits, and acclimation coaching are provided to ensure a gentle transition."
+    }
+  ],
+  "terms": [
+    {
+      "section_title_en": "Use of Site",
+      "body_en": "By browsing missmermaidsphynx.com you agree to use the content for personal guardianship research only. Redistribution, automated scraping, or resale of intellectual property is prohibited without written consent."
+    },
+    {
+      "section_title_en": "Intellectual Property",
+      "body_en": "All photography, videography, branding, and written material are owned by Miss Mermaid Sphynx. Trademarks and imagery may not be reproduced without licensing."
+    }
+  ],
+  "privacy": [
+    {
+      "section_title_en": "Information We Collect",
+      "body_en": "We collect contact details, application answers, and communication preferences you submit through our forms. This information is stored securely and used solely to evaluate guardianship suitability."
+    },
+    {
+      "section_title_en": "How Data Is Used",
+      "body_en": "Details allow us to personalise adoption guidance, share nursery updates, and comply with contract obligations. We never sell data to third parties and honour deletion requests at any time."
+    }
+  ],
+  "contact": []
+}

@@ -502,6 +502,52 @@ function mm_ff_notifications_payload($subject)
     ]];
 }
 
+function mm_ff_waitlist_choices()
+{
+    static $cached = null;
+
+    if (null !== $cached) {
+        return $cached;
+    }
+
+    if (!function_exists('get_posts')) {
+        $cached = [
+            'general' => __('General Waitlist', 'miss-mermaid'),
+        ];
+        return $cached;
+    }
+
+    $choices = [];
+    $posts = get_posts([
+        'post_type'      => 'litter',
+        'post_status'    => 'publish',
+        'numberposts'    => -1,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'suppress_filters' => false,
+    ]);
+
+    if ($posts) {
+        foreach ($posts as $post) {
+            $code = function_exists('get_field') ? get_field('litter_id', $post->ID) : '';
+            if (!$code) {
+                $code = $post->post_title;
+            }
+            if (!$code) {
+                continue;
+            }
+            $choices[$code] = $code;
+        }
+    }
+
+    if (!$choices) {
+        $choices['general'] = __('General Waitlist', 'miss-mermaid');
+    }
+
+    $cached = $choices;
+    return $choices;
+}
+
 $forms = [
     'adoption_inquiry' => [
         'title'        => 'Adoption Inquiry',
@@ -549,6 +595,19 @@ $forms = [
         ],
         'confirmation'  => __('Thank you for contacting Miss Mermaid Sphynx. We will respond within one business day.', 'miss-mermaid'),
         'subject'       => 'New Concierge Message from {inputs.guardian_name}',
+    ],
+    'waitlist' => [
+        'title'        => 'Waitlist Request',
+        'button'       => 'Join Waitlist',
+        'fields'       => [
+            mm_ff_text_field(0, 'guardian_name', 'Name', 'Your full name'),
+            mm_ff_select_field(1, 'litter_code', 'Preferred Litter', mm_ff_waitlist_choices(), true, false, __('Select a litter', 'miss-mermaid')),
+            mm_ff_email_field(2, 'email', 'Email', 'you@example.com'),
+            mm_ff_text_field(3, 'phone', 'Mobile Phone', '+1 555 123 4567', 'tel', true),
+            mm_ff_textarea_field(4, 'notes', 'Notes', 'Share timing expectations or questions.', false),
+        ],
+        'confirmation'  => __('Thank you. You are officially queued for the next selection notice. Watch for portal access arriving soon.', 'miss-mermaid'),
+        'subject'       => 'New Waitlist Request: {inputs.litter_code}',
     ],
     'adoption_apply' => [
         'title'        => 'Adoption Application',
@@ -608,7 +667,7 @@ $forms = [
             mm_ff_textarea_field(7, 'notes', 'Notes (optional)', '', false),
         ],
         'confirmation'  => __('Thank you. Our guardianship team will review your receipt and update your status shortly.', 'miss-mermaid'),
-        'subject'       => 'New Payment Proof submitted by {inputs.guardian_name}',
+        'subject'       => 'New Payment Proof submission',
     ],
     'select_kitten' => [
         'title'        => 'Kitten Selection',

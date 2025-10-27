@@ -1,0 +1,67 @@
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|40","right":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|50"}},"className":"mm-page mm-page--payment","layout":{"type":"constrained","wideSize":"1040px"}} -->
+<div class="wp-block-group mm-page mm-page--payment" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--40)">
+    <!-- wp:heading {"textAlign":"center","level":1} -->
+    <h1 class="wp-block-heading has-text-align-center">Concierge Payment Path</h1>
+    <!-- /wp:heading -->
+
+    <!-- wp:paragraph {"align":"center","style":{"typography":{"lineHeight":"1.6"}},"fontSize":"large"} -->
+    <p class="has-text-align-center has-large-font-size" style="line-height:1.6">Once your guardianship status advances to <em>Approved</em>, deposits and balances may be shared through the secure channels below. Every payment supports bespoke nutrition, wellness testing, and our spa-level send-off ritual for your Miss Mermaid kitten.</p>
+    <!-- /wp:paragraph -->
+
+    <!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
+    <div class="wp-block-columns alignwide">
+        <!-- wp:column {"style":{"spacing":{"blockGap":"var:preset|spacing|20"},"color":{"background":"#14141c"},"border":{"radius":"18px"}},"className":"mm-callout mm-callout--zelle"} -->
+        <div class="wp-block-column mm-callout mm-callout--zelle has-background" style="border-radius:18px;background-color:#14141c">
+            <!-- wp:heading {"level":3} -->
+            <h3 class="wp-block-heading">Zelle — Preferred</h3>
+            <!-- /wp:heading -->
+
+            <!-- wp:paragraph -->
+            <p>Recipient: <strong>finance@missmermaidcat.com</strong><br>Memo: Guardian name + kitten ID (if assigned)</p>
+            <!-- /wp:paragraph -->
+
+            <!-- wp:paragraph -->
+            <p>Deposits are $1,000 USD. Please send screenshots immediately after transfer so we can secure your place in the selection window.</p>
+            <!-- /wp:paragraph -->
+        </div>
+        <!-- /wp:column -->
+
+        <!-- wp:column {"style":{"spacing":{"blockGap":"var:preset|spacing|20"},"color":{"background":"#14141c"},"border":{"radius":"18px"}},"className":"mm-callout mm-callout--paypal"} -->
+        <div class="wp-block-column mm-callout mm-callout--paypal has-background" style="border-radius:18px;background-color:#14141c">
+            <!-- wp:heading {"level":3} -->
+            <h3 class="wp-block-heading">PayPal Friends &amp; Family</h3>
+            <!-- /wp:heading -->
+
+            <!-- wp:paragraph -->
+            <p>PayPal ID: <strong>@MissMermaidSphynx</strong><br>Currency: USD only · Fee-free · No notes referencing “goods”</p>
+            <!-- /wp:paragraph -->
+
+            <!-- wp:paragraph -->
+            <p>Balances are due after contract signing and vet clearance. Kindly double-check the recipient before sending to avoid platform holds.</p>
+            <!-- /wp:paragraph -->
+        </div>
+        <!-- /wp:column -->
+    </div>
+    <!-- /wp:columns -->
+
+    <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20"},"border":{"radius":"18px","width":"1px"},"color":{"background":"#111117"}},"className":"mm-alert mm-alert--note"} -->
+    <div class="wp-block-group mm-alert mm-alert--note has-background" style="border-width:1px;border-radius:18px;background-color:#111117">
+        <!-- wp:paragraph {"style":{"typography":{"lineHeight":"1.6"}}} -->
+        <p style="line-height:1.6"><strong>Need the complete policy?</strong> Review our <a href="/policies#payment">payment &amp; logistics standards</a> for timelines, refunds, and travel coordination. Concierge support is always available at <a href="mailto:concierge@missmermaidcat.com">concierge@missmermaidcat.com</a>.</p>
+        <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:group -->
+
+    <!-- wp:heading {"level":2,"fontSize":"x-large"} -->
+    <h2 class="wp-block-heading has-x-large-font-size">Upload Payment Proof</h2>
+    <!-- /wp:heading -->
+
+    <!-- wp:paragraph -->
+    <p>Submit your receipt within 12 hours of sending funds. Our guardianship team confirms deposits chronologically and will update your portal status within one business day.</p>
+    <!-- /wp:paragraph -->
+
+    <!-- wp:shortcode -->
+    [mm_form slug="payment_proof"]
+    <!-- /wp:shortcode -->
+</div>
+<!-- /wp:group -->

@@ -1,0 +1,531 @@
+{
+  "home": [
+    {
+      "section_key": "hero",
+      "priority": "A",
+      "title": "Different is Beautiful",
+      "subtitle": "World‑Champion Sphynx",
+      "body": "Meet the Miss Mermaid guardians raising confident, affectionate Sphynx personalities with science‑led care and artistry.",
+      "visual_type": "image_or_texture",
+      "media_ref": "/media/hero.jpg",
+      "cta1_text": "Start Adoption Journey",
+      "cta1_link": "/kittens?tab=available",
+      "cta2_text": "View Gallery",
+      "cta2_link": "/gallery"
+    },
+    {
+      "section_key": "trust_1",
+      "priority": "B",
+      "title": "Champion Pedigrees",
+      "subtitle": "",
+      "body": "Curated pairings with global titles, verified genetics, and temperament harmony.",
+      "visual_type": "icon",
+      "media_ref": "/media/icon-trophy.svg",
+      "cta1_text": "",
+      "cta1_link": "",
+      "cta2_text": "",
+      "cta2_link": ""
+    },
+    {
+      "section_key": "trust_2",
+      "priority": "B",
+      "title": "Holistic Wellness",
+      "subtitle": "",
+      "body": "Warm nurseries, curated nutrition, and enrichment rituals champion whole‑body balance.",
+      "visual_type": "icon",
+      "media_ref": "/media/icon-heart.svg",
+      "cta1_text": "",
+      "cta1_link": "",
+      "cta2_text": "",
+      "cta2_link": ""
+    },
+    {
+      "section_key": "trust_3",
+      "priority": "B",
+      "title": "Lifetime Allies",
+      "subtitle": "",
+      "body": "Dedicated guardianship coaching, alumni community, and wellness concierge.",
+      "visual_type": "icon",
+      "media_ref": "/media/icon-paw.svg",
+      "cta1_text": "",
+      "cta1_link": "",
+      "cta2_text": "",
+      "cta2_link": ""
+    },
+    {
+      "section_key": "cta_band",
+      "priority": "C",
+      "title": "Curious about upcoming litters?",
+      "subtitle": "",
+      "body": "Join our preview list to receive nursery updates, care blueprints, and private livestream invitations.",
+      "visual_type": "band",
+      "media_ref": "/media/bg-band.jpg",
+      "cta1_text": "Request Invitation",
+      "cta1_link": "/kittens?tab=waitlist",
+      "cta2_text": "",
+      "cta2_link": ""
+    }
+  ],
+  "about": [
+    {
+      "section_key": "about_intro",
+      "order": 1,
+      "heading": "About Miss Mermaid",
+      "body": "We founded Miss Mermaid on the belief that true breeding is where love, art, and genetics meet. We produce visually arresting, emotionally intuitive, and remarkably healthy Sphynx companions.",
+      "media_ref": "/media/about/intro.jpg"
+    },
+    {
+      "section_key": "philosophy",
+      "order": 2,
+      "heading": "Our Philosophy",
+      "body": "Transparent care, ethical decision‑making, and unwavering wellbeing. Screenings, enrichment, and thoughtful placement elevate every experience for guardian and kitten.",
+      "media_ref": "/media/about/philosophy.jpg"
+    },
+    {
+      "section_key": "bloodlines",
+      "order": 3,
+      "heading": "Our Bloodlines",
+      "body": "We steward the legacy of CFA luminaries with meticulous pedigrees, HCM‑negative lines, and independent health testing for structure, personality, and longevity.",
+      "media_ref": "/media/about/bloodlines.jpg"
+    },
+    {
+      "section_key": "life",
+      "order": 4,
+      "heading": "Life at Miss Mermaid",
+      "body": "Free‑roam family life, daily play, guest interactions, and immaculate grooming keep skins luminous, eyes bright, and characters secure.",
+      "media_ref": "/media/about/life.jpg"
+    },
+    {
+      "section_key": "mission",
+      "order": 5,
+      "heading": "Our Mission",
+      "body": "Elevate the global perception of the Sphynx breed through responsible breeding, transparent education, and artistry of care.",
+      "media_ref": "/media/about/mission.jpg"
+    }
+  ],
+  "guides": [
+    {
+      "section_key": "bathing",
+      "order": 1,
+      "title": "Bathing & Skin Care",
+      "body": "Gentle weekly bath; avoid harsh shampoos; moisturize; clean ears and nails.",
+      "media_ref": "/media/guides/bath.jpg"
+    },
+    {
+      "section_key": "nutrition",
+      "order": 2,
+      "title": "Nutrition & Health",
+      "body": "High‑quality protein and hydration; regular vet visits; annual HCM screenings.",
+      "media_ref": "/media/guides/nutrition.jpg"
+    },
+    {
+      "section_key": "temperature",
+      "order": 3,
+      "title": "Temperature & Comfort",
+      "body": "Warm spots, heated pads on low, breathable covers, sun‑safe sweaters.",
+      "media_ref": "/media/guides/temp.jpg"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Are Sphynx cats hypoallergenic?",
+      "answer": "Less dander than coated breeds, but not fully hypoallergenic. Regular bathing and sheet changes help.",
+      "schema": true
+    },
+    {
+      "question": "Do Sphynx get cold easily?",
+      "answer": "They crave warmth at rest; layer clothing and keep cozy beds.",
+      "schema": true
+    },
+    {
+      "question": "How often to bathe?",
+      "answer": "About once a week or as needed; rinse thoroughly and moisturize.",
+      "schema": true
+    }
+  ],
+  "achievements": [
+    {
+      "year": "2018",
+      "title_en": "First World Title",
+      "description_en": "Best in Show — launched Miss Mermaid onto the global stage.",
+      "media_ref": "/media/ach/2018.jpg",
+      "judge_quote_en": "“Immaculate skin and balance.”",
+      "doc_ref": "/docs/2018-score.pdf"
+    },
+    {
+      "year": "2022",
+      "title_en": "Global Podiums",
+      "description_en": "Three queens rank top three worldwide.",
+      "media_ref": "/media/ach/2022.jpg",
+      "judge_quote_en": "“Structure and temperament in harmony.”",
+      "doc_ref": "/docs/2022-results.pdf"
+    },
+    {
+      "year": "2024",
+      "title_en": "Wellness Retreat",
+      "description_en": "Guardianship retreat with wellness labs and alumni suites.",
+      "media_ref": "/media/ach/2024.jpg",
+      "judge_quote_en": "",
+      "doc_ref": ""
+    }
+  ],
+  "gallery": {
+    "albums": [
+      {
+        "album_key": "champions",
+        "album_title_en": "Champion Portraits",
+        "description_en": "CFA‑level portraits of queens and studs.",
+        "cover": "/media/gallery/champions/cover.jpg"
+      },
+      {
+        "album_key": "kittens",
+        "album_title_en": "Kitten Diaries",
+        "description_en": "Seasonal diaries and milestones.",
+        "cover": "/media/gallery/kittens/cover.jpg"
+      },
+      {
+        "album_key": "art",
+        "album_title_en": "Miss Mermaid · Art",
+        "description_en": "Original Sphynx‑inspired artworks.",
+        "cover": "/media/gallery/art/cover.jpg"
+      }
+    ],
+    "items": [
+      {
+        "album_key": "art",
+        "order": 1,
+        "media_ref": "/media/gallery/art/1.jpg",
+        "caption_en": "Gold‑on‑black ink study"
+      },
+      {
+        "album_key": "champions",
+        "order": 1,
+        "media_ref": "/media/gallery/champions/1.jpg",
+        "caption_en": "Loki — NW sire"
+      },
+      {
+        "album_key": "kittens",
+        "order": 1,
+        "media_ref": "/media/gallery/kittens/1.jpg",
+        "caption_en": "First bath training"
+      }
+    ]
+  },
+  "blog": [
+    {
+      "slug": "show-diary",
+      "title_en": "Inside a CFA Finals Weekend",
+      "excerpt_en": "Travel, prep, and ring‑by‑ring highlights.",
+      "hero_ref": "/media/blog/show.jpg",
+      "sections": [
+        {
+          "title": "Packing for Success",
+          "body": "Our grooming kit and nutrition plan before travel.",
+          "order": 1
+        },
+        {
+          "title": "In the Ring",
+          "body": "What judges look for in balance and expression.",
+          "order": 2
+        },
+        {
+          "title": "Recovery & Care",
+          "body": "Post‑show rest, hydration, and bonding.",
+          "order": 3
+        }
+      ],
+      "cta_text": "Explore Achievements",
+      "cta_link": "/achievements"
+    },
+    {
+      "slug": "grooming-rituals",
+      "title_en": "Show‑Ready Grooming at Home",
+      "excerpt_en": "Weekly ritual that keeps skins luminous and calm.",
+      "hero_ref": "/media/blog/groom.jpg",
+      "sections": [
+        {
+          "title": "Bath Blueprint",
+          "body": "Step‑by‑step routine with products.",
+          "order": 1
+        },
+        {
+          "title": "Nail & Ear Care",
+          "body": "Quick checks keep details immaculate.",
+          "order": 2
+        },
+        {
+          "title": "Comfort Layering",
+          "body": "Sweaters and bedding for seasons.",
+          "order": 3
+        }
+      ],
+      "cta_text": "Read Guides",
+      "cta_link": "/guides"
+    },
+    {
+      "slug": "alumni-first-month",
+      "title_en": "Alumni Diaries: First Month",
+      "excerpt_en": "What new guardians experience in the first 30 days.",
+      "hero_ref": "/media/blog/alumni.jpg",
+      "sections": [
+        {
+          "title": "Week 1",
+          "body": "Settling and litter habits.",
+          "order": 1
+        },
+        {
+          "title": "Week 2–3",
+          "body": "Play, nutrition tweaks, and bonding.",
+          "order": 2
+        },
+        {
+          "title": "Week 4",
+          "body": "Vet check and milestone photos.",
+          "order": 3
+        }
+      ],
+      "cta_text": "Apply Now",
+      "cta_link": "/kittens?tab=available"
+    }
+  ],
+  "contact": [
+    {
+      "channel": "email",
+      "value": "info@missmermaidcat.com",
+      "link": "info@missmermaidcat.com"
+    },
+    {
+      "channel": "instagram",
+      "value": "Instagram",
+      "link": "https://instagram.com/"
+    },
+    {
+      "channel": "youtube",
+      "value": "YouTube",
+      "link": "https://youtube.com/"
+    }
+  ],
+  "policies": [],
+  "terms": [
+    {
+      "section_title_en": "Use of Site",
+      "body_en": "Content ownership and acceptable use."
+    }
+  ],
+  "privacy": [
+    {
+      "section_title_en": "Data",
+      "body_en": "We store application basics to process requests. No sale of personal data."
+    }
+  ],
+  "kittens": [
+    {
+      "kitten_id": "MM2025-01",
+      "status": "available",
+      "price": 4500,
+      "sex": "female",
+      "color": "white",
+      "birthday": "2024-10-15",
+      "age_hint": "1 year",
+      "temperament_tags": "gentle;affectionate;lap lover",
+      "thumbnail": "/media/kittens/MM2025-01/cover.jpg",
+      "gallery_refs": "/media/kittens/MM2025-01/1.jpg;/media/kittens/MM2025-01/2.jpg",
+      "short_desc_en": "Elegant white female with luminous skin and calm temperament."
+    },
+    {
+      "kitten_id": "MM2025-02",
+      "status": "available",
+      "price": 3800,
+      "sex": "male",
+      "color": "blue, cream, bicolor",
+      "birthday": "2024-11-20",
+      "age_hint": "11 months",
+      "temperament_tags": "curious;playful",
+      "thumbnail": "/media/kittens/MM2025-02/cover.jpg",
+      "gallery_refs": "/media/kittens/MM2025-02/1.jpg;/media/kittens/MM2025-02/2.jpg",
+      "short_desc_en": "Bicolor male, people‑oriented and highly engaged."
+    }
+  ],
+  "kitten_details": {
+    "MM2025-01": {
+      "parents_sire": "NW‑title sire",
+      "parents_dam": "Best Sphynx queen",
+      "health_notes_en": "Independent screenings, negative HCM lineage, current vaccines, spayed/neutered before placement.",
+      "value_points_en": "Show‑ready grooming; socialized with family; transition kit included.",
+      "care_profile_en": "Bath weekly with mild soap; moisturize; maintain warm bedding and hydration.",
+      "video_refs": "https://youtu.be/demo1",
+      "apply_button_text": "Apply for this kitten",
+      "apply_target": "/apply?kitten=MM2025-01"
+    },
+    "MM2025-02": {
+      "parents_sire": "Grand Champion sire",
+      "parents_dam": "Champion line queen",
+      "health_notes_en": "Screened by licensed vets; pedigree on request; microchip included.",
+      "value_points_en": "Confident personality; playful energy; excellent appetite.",
+      "care_profile_en": "Same baseline routine; add sun‑safe sweaters for outings.",
+      "video_refs": "https://youtu.be/demo2",
+      "apply_button_text": "Apply for this kitten",
+      "apply_target": "/apply?kitten=MM2025-02"
+    }
+  },
+  "litters": [
+    {
+      "litter_code": "LIT‑AURORA‑2025",
+      "sire": "NW Sire Loki",
+      "dam": "Queen Wanda",
+      "due_window": "2025‑12 ~ 2026‑01",
+      "expected_colors": "blue; white; seal",
+      "slots_total": "6",
+      "policy_highlight_en": "Selection opens around week‑8. Deposit $1000 secures priority; selection window 72h.",
+      "join_cta_text": "Join waitlist",
+      "join_target": "/waitlist?litter=LIT‑AURORA‑2025"
+    },
+    {
+      "litter_code": "LIT‑NYX‑2026",
+      "sire": "GC Sire Yoda",
+      "dam": "Queen Dada",
+      "due_window": "2026‑02 ~ 03",
+      "expected_colors": "black; chocolate",
+      "slots_total": "5",
+      "policy_highlight_en": "If no match this litter, deposit rolls to next; refunds only per health contingency.",
+      "join_cta_text": "Join waitlist",
+      "join_target": "/waitlist?litter=LIT‑NYX‑2026"
+    }
+  ],
+  "adoption_flow": [
+    {
+      "step_key": "apply",
+      "order": 1,
+      "title_en": "Submit Application",
+      "copy_en": "Tell us about your home, experience, and preferences. Approval is required before payment.",
+      "cta_text": "Start application",
+      "cta_target": "/apply"
+    },
+    {
+      "step_key": "review",
+      "order": 2,
+      "title_en": "Application Review",
+      "copy_en": "We evaluate fit carefully to ensure the best match for kittens and guardians.",
+      "cta_text": "",
+      "cta_target": ""
+    },
+    {
+      "step_key": "payment",
+      "order": 3,
+      "title_en": "Payment & Confirmation",
+      "copy_en": "Pay deposit or full amount via Zelle/PayPal F&F and upload proof. We confirm by email.",
+      "cta_text": "View payment options",
+      "cta_target": "/policies#payment"
+    },
+    {
+      "step_key": "contract",
+      "order": 4,
+      "title_en": "Sign Agreement",
+      "copy_en": "E‑sign the guardianship agreement; receive certificate details.",
+      "cta_text": "Sign now",
+      "cta_target": "/contract"
+    },
+    {
+      "step_key": "pickup",
+      "order": 5,
+      "title_en": "Schedule Pickup",
+      "copy_en": "Local delivery in LA area or fly‑in pickup; no cargo for Sphynx.",
+      "cta_text": "Book appointment",
+      "cta_target": "/schedule"
+    }
+  ],
+  "navigation": {
+    "primary": [
+      {
+        "label": "Home",
+        "link": "/",
+        "order": 1
+      },
+      {
+        "label": "About",
+        "link": "/about",
+        "order": 2
+      },
+      {
+        "label": "Kittens",
+        "link": "/kittens",
+        "order": 3
+      },
+      {
+        "label": "Achievements",
+        "link": "/achievements",
+        "order": 4
+      },
+      {
+        "label": "Gallery",
+        "link": "/gallery",
+        "order": 5
+      },
+      {
+        "label": "Guides",
+        "link": "/guides",
+        "order": 6
+      },
+      {
+        "label": "Blog",
+        "link": "/blog",
+        "order": 7
+      },
+      {
+        "label": "Contact",
+        "link": "/contact",
+        "order": 8
+      }
+    ],
+    "footer": [
+      {
+        "label": "Apply",
+        "link": "/apply",
+        "order": 1
+      },
+      {
+        "label": "Waitlist",
+        "link": "/kittens?tab=waitlist",
+        "order": 2
+      },
+      {
+        "label": "Policies",
+        "link": "/policies",
+        "order": 3
+      },
+      {
+        "label": "Terms",
+        "link": "/terms",
+        "order": 4
+      },
+      {
+        "label": "Privacy",
+        "link": "/privacy",
+        "order": 5
+      },
+      {
+        "label": "Sitemap",
+        "link": "/sitemap_index.xml",
+        "order": 6
+      }
+    ]
+  },
+  "seo": [
+    {
+      "route": "/",
+      "title_en": "Miss Mermaid · Sphynx — World‑Champion Sphynx Cattery in Los Angeles",
+      "meta_description_en": "Champion Sphynx kittens with impeccable health, artistry of care, and concierge guardianship support.",
+      "og_image": "/media/og/home.jpg",
+      "primary_keyword": "sphynx kittens",
+      "secondary_keywords": "sphynx breeder los angeles; champion sphynx"
+    },
+    {
+      "route": "/kittens",
+      "title_en": "Available Sphynx Kittens & Waitlist — Miss Mermaid",
+      "meta_description_en": "Explore available companions or reserve upcoming litters. Ethical, artful guardianship begins here.",
+      "og_image": "/media/og/kittens.jpg",
+      "primary_keyword": "available sphynx kittens",
+      "secondary_keywords": "sphynx waitlist; sphynx adoption process"
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "kittens": [
+    {
+      "kitten_id": "MM2025-01",
+      "status": "available",
+      "price": 4500,
+      "sex": "female",
+      "color": "white",
+      "birthday": "2024-10-15",
+      "age_hint": "1 year",
+      "temperament_tags": "gentle;affectionate;lap lover",
+      "cover_image": "/media/kittens/MM2025-01/cover.jpg",
+      "gallery": [
+        "/media/kittens/MM2025-01/1.jpg",
+        "/media/kittens/MM2025-01/2.jpg"
+      ],
+      "short_desc": "Elegant white female with luminous skin and calm temperament.",
+      "detail": {
+        "sire": "NW‑title sire",
+        "dam": "Best Sphynx queen",
+        "health_notes": "Independent screenings, negative HCM lineage, current vaccines, spayed/neutered before placement.",
+        "value_points": "Show‑ready grooming; socialized with family; transition kit included.",
+        "care_profile": "Bath weekly with mild soap; moisturize; maintain warm bedding and hydration.",
+        "videos": [
+          "https://youtu.be/demo1"
+        ],
+        "apply_text": "Apply for this kitten",
+        "apply_url": "/apply?kitten=MM2025-01"
+      }
+    },
+    {
+      "kitten_id": "MM2025-02",
+      "status": "available",
+      "price": 3800,
+      "sex": "male",
+      "color": "blue, cream, bicolor",
+      "birthday": "2024-11-20",
+      "age_hint": "11 months",
+      "temperament_tags": "curious;playful",
+      "cover_image": "/media/kittens/MM2025-02/cover.jpg",
+      "gallery": [
+        "/media/kittens/MM2025-02/1.jpg",
+        "/media/kittens/MM2025-02/2.jpg"
+      ],
+      "short_desc": "Bicolor male, people‑oriented and highly engaged.",
+      "detail": {
+        "sire": "Grand Champion sire",
+        "dam": "Champion line queen",
+        "health_notes": "Screened by licensed vets; pedigree on request; microchip included.",
+        "value_points": "Confident personality; playful energy; excellent appetite.",
+        "care_profile": "Same baseline routine; add sun‑safe sweaters for outings.",
+        "videos": [
+          "https://youtu.be/demo2"
+        ],
+        "apply_text": "Apply for this kitten",
+        "apply_url": "/apply?kitten=MM2025-02"
+      }
+    }
+  ],
+  "litters": [
+    {
+      "litter_id": "LIT‑AURORA‑2025",
+      "queen": "Queen Wanda",
+      "sire": "NW Sire Loki",
+      "due_window": "2025‑12 ~ 2026‑01",
+      "expected_colors": "blue; white; seal",
+      "slots_total": "6",
+      "policy_highlight": "Selection opens around week‑8. Deposit $1000 secures priority; selection window 72h.",
+      "join_text": "Join waitlist",
+      "join_url": "/waitlist?litter=LIT‑AURORA‑2025",
+      "note": "窝次规则"
+    },
+    {
+      "litter_id": "LIT‑NYX‑2026",
+      "queen": "Queen Dada",
+      "sire": "GC Sire Yoda",
+      "due_window": "2026‑02 ~ 03",
+      "expected_colors": "black; chocolate",
+      "slots_total": "5",
+      "policy_highlight": "If no match this litter, deposit rolls to next; refunds only per health contingency.",
+      "join_text": "Join waitlist",
+      "join_url": "/waitlist?litter=LIT‑NYX‑2026",
+      "note": "规则"
+    }
+  ],
+  "adoption_flow": [
+    {
+      "key": "apply",
+      "order": 1,
+      "title": "Submit Application",
+      "copy": "Tell us about your home, experience, and preferences. Approval is required before payment.",
+      "cta_text": "Start application",
+      "cta_target": "/apply"
+    },
+    {
+      "key": "review",
+      "order": 2,
+      "title": "Application Review",
+      "copy": "We evaluate fit carefully to ensure the best match for kittens and guardians.",
+      "cta_text": null,
+      "cta_target": null
+    },
+    {
+      "key": "payment",
+      "order": 3,
+      "title": "Payment & Confirmation",
+      "copy": "Pay deposit or full amount via Zelle/PayPal F&F and upload proof. We confirm by email.",
+      "cta_text": "View payment options",
+      "cta_target": "/policies#payment"
+    },
+    {
+      "key": "contract",
+      "order": 4,
+      "title": "Sign Agreement",
+      "copy": "E‑sign the guardianship agreement; receive certificate details.",
+      "cta_text": "Sign now",
+      "cta_target": "/contract"
+    },
+    {
+      "key": "pickup",
+      "order": 5,
+      "title": "Schedule Pickup",
+      "copy": "Local delivery in LA area or fly‑in pickup; no cargo for Sphynx.",
+      "cta_text": "Book appointment",
+      "cta_target": "/schedule"
+    }
+  ],
+  "forms": {
+    "apply": [
+      {
+        "field_key": "email",
+        "label": "Email",
+        "type": "email",
+        "required": true,
+        "options": null,
+        "help_text": "We will use this to continue your application."
+      },
+      {
+        "field_key": "phone",
+        "label": "Mobile phone",
+        "type": "text",
+        "required": true,
+        "options": null,
+        "help_text": "+ country code if outside US."
+      },
+      {
+        "field_key": "location",
+        "label": "City / State / Country",
+        "type": "text",
+        "required": true,
+        "options": null,
+        "help_text": "Helps us plan pickup logistics."
+      },
+      {
+        "field_key": "experience",
+        "label": "Cat experience",
+        "type": "textarea",
+        "required": true,
+        "options": null,
+        "help_text": "Share your past guardianship experience."
+      },
+      {
+        "field_key": "preferences",
+        "label": "Preferences (sex/color/temperament)",
+        "type": "textarea",
+        "required": false,
+        "options": null,
+        "help_text": "Optional; helps matching."
+      },
+      {
+        "field_key": "kitten_id",
+        "label": "Kitten ID (if any)",
+        "type": "text",
+        "required": false,
+        "options": null,
+        "help_text": "If you already selected a kitten from the list."
+      }
+    ],
+    "waitlist": [
+      {
+        "field_key": "litter_code",
+        "label": "Litter code",
+        "type": "select",
+        "required": true,
+        "options": "LIT‑AURORA‑2025;LIT‑NYX‑2026",
+        "help_text": "Choose the litter you join."
+      },
+      {
+        "field_key": "email",
+        "label": "Email",
+        "type": "email",
+        "required": true,
+        "options": null,
+        "help_text": null
+      },
+      {
+        "field_key": "phone",
+        "label": "Mobile phone",
+        "type": "text",
+        "required": true,
+        "options": null,
+        "help_text": null
+      },
+      {
+        "field_key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false,
+        "options": null,
+        "help_text": "Any preferences or timing constraints."
+      }
+    ]
+  },
+  "emails": {
+    "approve": {
+      "subject": "Your application is approved",
+      "body": "Dear {name},\n\nGreat news — your application has been approved. Next step: {next_step_link}.\nWe recommend reviewing payment options and policies here: {policies_link}.\n\nWarmly,\nMiss Mermaid · Sphynx"
+    },
+    "reject": {
+      "subject": "Your application status",
+      "body": "Dear {name},\n\nThank you for your interest. After careful review, we won’t proceed at this time. You’re welcome to stay on our public updates list.\n\nWarm regards,\nMiss Mermaid · Sphynx"
+    },
+    "payment_instr": {
+      "subject": "How to complete your payment",
+      "body": "Hi {name},\n\nYou may pay via Zelle (preferred) or PayPal Friends & Family. Upload proof here: {upload_link}.\nDeposits are $1000; selection usually opens ~8 weeks.\n\n— Team Miss Mermaid"
+    }
+  }
+}
